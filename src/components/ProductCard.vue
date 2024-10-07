@@ -7,25 +7,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: ['product']
-};
+<script setup>
+defineProps(['product']);
 </script>
-
-<style>
-.product-card {
-  border: 1px solid #ccc;
-  padding: 16px;
-  margin: 16px;
-  text-align: center;
-}
-.product-image {
-  max-width: 100%;
-  height: auto;
-}
-</style>
-
-
-<!--// Compnent som ska visa varje p roduket med bild, titel och pris och länk till produktens detaljer-->
-
