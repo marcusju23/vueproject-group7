@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { apiService } from '@/services/apiService.js';
+import { apiService } from '@/api/apiService.js';
 
 export default {
   data() {

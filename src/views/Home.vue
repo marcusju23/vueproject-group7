@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { apiService } from '@/services/apiService.js';
+import { apiService } from '@/api/apiService.js';
 import ProductCard from '@/components/ProductCard.vue';
 
 export default {
