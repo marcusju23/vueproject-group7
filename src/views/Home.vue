@@ -1,11 +1,11 @@
 <template>
   <div class="product-list">
-    <ProductCard v-for="product in products" :key="product.id" :product="product"/>
+    <ProductCard v-for="product in products" :key="product.id" :product="product" />
   </div>
 </template>
 
 <script>
-import { apiService } from '@/api/apiService.js';
+import { apiService } from '@/api/apiService.js'; // Ensure the correct import path
 import ProductCard from '@/components/ProductCard.vue';
 
 export default {
@@ -16,10 +16,17 @@ export default {
     };
   },
   async mounted() {
-    this.products = await apiService.getProducts();
+    try {
+      const products = await apiService.getProducts();
+      console.log(products); // Check if products are being fetched
+      this.products = products;
+    } catch (error) {
+      console.error('Error fetching products:', error); // Catch and log any errors
+    }
   }
-};
+}
 </script>
+
 
 <style>
 .product-list {
