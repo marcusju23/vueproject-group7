@@ -10,3 +10,20 @@
 .menu-item {
     @apply block px-4 py-2 hover:bg-gray-700;
 }
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product-card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin: 16px;
+    text-align: center;
+}
+
+.product-image {
+    max-width: 100%;
+    height: auto;
+}
