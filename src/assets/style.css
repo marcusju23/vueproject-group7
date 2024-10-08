@@ -2,28 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    @apply text-sm leading-5;
+}
+
 .active {
-    font-weight: bold;
-    color: beige;
+    @apply font-bold text-amber-100;
 }
 
 .menu-item {
-    @apply block px-4 py-2 hover:bg-gray-700;
+    @apply block px-4 py-2 hover:bg-neutral-700;
 }
 
 .product-list {
-    display: flex;
-    flex-wrap: wrap;
+    @apply flex flex-wrap;
 }
 
 .product-card {
-    border: 1px solid #ccc;
-    padding: 16px;
-    margin: 16px;
-    text-align: center;
+    @apply border border-gray-300 p-1 m-1 text-center;
 }
 
 .product-image {
-    max-width: 100%;
-    height: auto;
+    @apply max-w-52 h-auto;
+}
+
+.product-h3 {
+    @apply font-semibold max-w-52 text-left;
+}
+
+.product-h1 {
+    @apply max-w-52 break-words font-extrabold text-left;
+}
+
+p {
+    @apply break-words font-light text-left;
+}
+
+.product-card:hover .product-h3 {
+    @apply text-stone-700 underline;
+}
+
+.product-price {
+    @apply font-semibold;
 }
