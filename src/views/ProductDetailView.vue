@@ -1,7 +1,7 @@
 <template>
   <div v-if="product">
     <h1>{{ product.title }}</h1>
-    <img :src="product.images[0]" alt="product image"/>
+    <img :src="product.images?.[0]" alt="product image" v-if="product.images?.length" />
     <p>{{ product.description }}</p>
     <p>{{ product.price }} $</p>
   </div>
@@ -16,7 +16,11 @@ const product = ref(null);
 const route = useRoute();
 
 onMounted(async () => {
-  const id = route.params.id;
-  product.value = await apiService.getProductById(id);
+  try {
+    const id = route.params.id;
+    product.value = await apiService.getProductById(id);
+  } catch (error) {
+    console.error('Error fetching product:', error);
+  }
 });
 </script>
