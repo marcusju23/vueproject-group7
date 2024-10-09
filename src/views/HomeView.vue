@@ -1,10 +1,6 @@
 <template>
-  <div>
-    <ProductCard
-        v-for="(product, index) in products"
-        :key="index"
-        :product="product"
-    />
+  <div class="product-list">
+    <ProductCard v-for="(product, index) in products" :key="index" :product="product"/>
   </div>
 </template>
 
