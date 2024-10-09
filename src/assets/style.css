@@ -6,6 +6,10 @@ body {
     @apply text-sm leading-5;
 }
 
+p {
+    @apply break-words font-light text-left;
+}
+
 .active {
     @apply font-bold text-amber-100;
 }
@@ -26,22 +30,30 @@ body {
     @apply max-w-52 h-auto;
 }
 
-.product-h3 {
-    @apply font-semibold max-w-52 text-left;
-}
-
-.product-h1 {
-    @apply max-w-52 break-words font-extrabold text-left;
-}
-
-p {
-    @apply break-words font-light text-left;
-}
-
-.product-card:hover .product-h3 {
+.product-card:hover .product-description {
     @apply text-stone-700 underline;
 }
 
 .product-price {
     @apply font-semibold;
+}
+
+.product-description {
+    @apply font-semibold max-w-52 text-left;
+}
+
+.product-category {
+    @apply max-w-52 break-words font-extrabold text-left;
+}
+
+.product-title {
+    @apply max-w-52 break-words font-extrabold text-left
+}
+
+.product-rating {
+    @apply max-w-52 break-words font-extrabold text-left;
+}
+
+.add-to-cart-btn {
+    @apply rounded-md text-sm font-semibold;
 }
