@@ -39,7 +39,7 @@ p {
 }
 
 .product-description {
-    @apply font-semibold max-w-52 text-left;
+    @apply font-semibold max-w-64 text-left;
 }
 
 .product-description::first-letter {
