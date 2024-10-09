@@ -11,7 +11,10 @@
     
     export default {
         data(){
-            footerText: 'Vueproject inc.'
+            return{
+                footerText: 'Vueproject inc.'
+            }
+            
         }
     }
 </script>
