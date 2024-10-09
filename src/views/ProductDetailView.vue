@@ -1,12 +1,12 @@
 <template>
   <div v-if="product">
-    <h1>{{ product.title }}</h1>
-    <img :src="product.image" alt="product" />
-    <p>{{ product.category }}</p>
-    <p>{{ product.description }}</p>
-    <p>${{ product.price }}</p>
-    <p>{{ product.rating?.rate }} / 5 ({{ product.rating?.count }} reviews)</p>
-    <button>Add to Cart</button>
+    <h1 class="product-title">{{ product.title }}</h1>
+    <img class="product-image" :src="product.image" alt="product" />
+    <p class="product-category">{{ product.category }}</p>
+    <p class="product-description">{{ product.description }}</p>
+    <p class="product-price">${{ product.price }}</p>
+    <p class="product-rating">{{ product.rating?.rate }} / 5 ({{ product.rating?.count }} reviews)</p>
+    <button class="add-to-cart-btn">Add to Cart</button>
   </div>
   <div v-else-if="error">
     <p>Product not found!</p>
@@ -24,7 +24,6 @@ import { apiService } from '@/api/apiService.js';
 const route = useRoute();
 const product = ref(null);
 const error = ref(false);
-
 
 onMounted(async () => {
   const productId = route.params.id;
