@@ -1,12 +1,12 @@
 <template>
-  <router-link :to="`/product/${product.id}`">
+  <RouterLink :to="`/product/${product.id}`">
     <div class="product-card">
-      <img :src="product.images[0]" alt="product" class="product-image"/>
+      <img :src="product.image" alt="product" class="product-image"/>
       <h3 class="product-h3">{{ product.title }}</h3>
       <p>{{ product.description }}</p>
       <p class="product-price">${{ product.price }}</p>
     </div>
-  </router-link>
+  </RouterLink>
 </template>
 
 <script setup>
