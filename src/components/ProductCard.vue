@@ -1,9 +1,9 @@
 <template>
   <RouterLink :to="`/product/${product.id}`">
     <div class="product-card">
-      <img :src="product.image" alt="product" class="product-image"/>
-      <h3 class="product-h3">{{ product.title }}</h3>
-      <p>{{ product.description }}</p>
+      <img class="product-image" :src="product.image" alt="product"/>
+      <h3 class="product-title">{{ product.title }}</h3>
+      <p class="product-description">{{ product.description }}</p>
       <p class="product-price">${{ product.price }}</p>
     </div>
   </RouterLink>
