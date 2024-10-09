@@ -1,25 +1,32 @@
 <template>
-  <div v-if="product">
-    <h1 class="product-title">{{ product.title }}</h1>
-    <img class="product-image" :src="product.image" alt="product" />
-    <p class="product-category">{{ product.category }}</p>
-    <p class="product-description">{{ product.description }}</p>
-    <p class="product-price">${{ product.price }}</p>
-    <p class="product-rating">{{ product.rating?.rate }} / 5 ({{ product.rating?.count }} reviews)</p>
-    <button class="add-to-cart-btn">Add to Cart</button>
-  </div>
-  <div v-else-if="error">
-    <p>Product not found!</p>
-  </div>
-  <div v-else>
-    Loading product details...
+  <div class="flex items-center justify-center h-screen">
+    <div class="flex" v-if="product">
+      <img class="max-w-xl mb-6" :src="product.image" alt="product" />
+      <div class="relative ml-6">
+        <h1 class="product-title mb-2">{{ product.title }}</h1>
+        <p class="product-rating text-blue-700 mb-2">{{ product.rating?.rate }} / 5 ({{ product.rating?.count }} reviews)</p>
+        <p class="product-description mb-4">{{ product.description }}</p>
+        <div class="bottom-div absolute bottom-0 w-full text-right">
+          <p class="product-price text-xl text-right">${{ product.price }}</p>
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div v-else-if="error">
+      <p>Product not found!</p>
+    </div>
+
+    <div v-else>
+      Loading product details...
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
-import { apiService } from '@/api/apiService.js';
+import {ref, onMounted} from 'vue';
+import {useRoute} from 'vue-router';
+import {apiService} from '@/api/apiService.js';
 
 const route = useRoute();
 const product = ref(null);
