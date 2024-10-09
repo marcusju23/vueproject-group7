@@ -16,7 +16,7 @@ const props = defineProps({
   product: {
     type: Object,
     required: true,
-    default: () => ({})  // Default empty object
+    default: () => ({})
   }
 });
 </script>
