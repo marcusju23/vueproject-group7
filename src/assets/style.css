@@ -23,11 +23,11 @@ p {
 }
 
 .product-card {
-    @apply border border-gray-300 p-1 m-1 text-center;
+    @apply border border-gray-300 p-1 m-1 text-center rounded-lg;
 }
 
 .product-image {
-    @apply max-w-52 h-auto;
+    @apply max-w-52 max-h-52 min-w-52 min-h-52 h-auto;
 }
 
 .product-card:hover .product-description {
@@ -35,11 +35,15 @@ p {
 }
 
 .product-price {
-    @apply font-semibold;
+    @apply font-semibold text-emerald-500;
 }
 
 .product-description {
     @apply font-semibold max-w-52 text-left;
+}
+
+.product-description::first-letter {
+    text-transform: uppercase;
 }
 
 .product-category {
