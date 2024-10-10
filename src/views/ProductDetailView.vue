@@ -1,32 +1,36 @@
 <template>
-  <div v-if="product">
-    <h1>{{ product.title }}</h1>
-    <img :src="product.image" alt="product image" />
+  <div class="flex items-center justify-center h-screen">
+    <div class="flex" v-if="product">
+      <img class="max-w-xl mb-6" :src="product.image" alt="product" />
+      <div class="relative ml-6">
+        <h1 class="product-title mb-2">{{ product.title }}</h1>
+        <p class="product-rating text-blue-700 mb-2">{{ product.rating?.rate }} / 5 ({{ product.rating?.count }} reviews)</p>
+        <p class="product-description mb-4">{{ product.description }}</p>
+        <div class="bottom-div absolute bottom-0 w-full text-right">
+          <p class="product-price text-xl text-right">${{ product.price }}</p>
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
 
-    <p><strong>Category:</strong> {{ product.category }}</p>
-    <p>{{ product.description }}</p>
-    <p><strong>Price:</strong> ${{ product.price }}</p>
-    <p><strong>Rating:</strong> {{ product.rating?.rate }} / 5 ({{ product.rating?.count }} reviews)</p>
+    <div v-else-if="error">
+      <p>Product not found!</p>
+    </div>
 
-    <button>Add to Cart</button>
-  </div>
-  <div v-else-if="error">
-    <p>Product not found!</p>
-  </div>
-  <div v-else>
-    Loading product details...
+    <div v-else>
+      Loading product details...
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
-import { apiService } from '@/api/apiService';
+import {ref, onMounted} from 'vue';
+import {useRoute} from 'vue-router';
+import {apiService} from '@/api/apiService.js';
 
 const route = useRoute();
 const product = ref(null);
 const error = ref(false);
-
 
 onMounted(async () => {
   const productId = route.params.id;
@@ -43,34 +47,3 @@ onMounted(async () => {
   }
 });
 </script>
-
-<style scoped>
-img {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 16px;
-}
-
-h1 {
-  font-size: 24px;
-  margin-bottom: 16px;
-}
-
-p {
-  font-size: 18px;
-  margin-bottom: 12px;
-}
-
-button {
-  background-color: #28a745;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-button:hover {
-  background-color: #218838;
-}
-</style>

@@ -1,12 +1,13 @@
 <template>
-  <div class="product-card">
-    <a :href="`/product/${product.id}`" class="product-link">
-      <img :src="product.image" alt="product image" class="product-image" />
-      <h1>{{ product.title }}</h1>
-      <p>{{ product.description }}</p>
-      <p>Price: ${{ product.price }}</p>
-    </a>
-  </div>
+  <RouterLink :to="`/product/${product.id}`">
+    <div class="product-card h-full flex flex-col justify-between">
+      <img class="product-image" :src="product.image" alt="product" />
+      <h3 class="product-title line-clamp-2 h-10 m2">{{ product.title }}</h3>
+      <div class="bottom-div flex-grow flex items-center justify-center">
+        <span class="product-price">${{ product.price }}</span>
+      </div>
+    </div>
+  </RouterLink>
 </template>
 
 <script setup>
@@ -20,40 +21,3 @@ const props = defineProps({
   }
 });
 </script>
-
-<style scoped>
-.product-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 16px;
-  width: 250px;
-  text-align: center;
-  transition: transform 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.product-card:hover {
-  transform: scale(1.05);
-}
-
-.product-image {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 16px;
-}
-
-.product-link {
-  text-decoration: none;
-  color: inherit;
-}
-
-h1 {
-  font-size: 18px;
-  margin: 10px 0;
-}
-
-p {
-  font-size: 14px;
-  color: #666;
-}
-</style>
