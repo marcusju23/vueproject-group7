@@ -7,14 +7,10 @@
       </span>
       <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-white sm:mt-0">
         <RouterLink to="/about">
-          <li>
             <p class="hover:underline me-4 md:me-6">About</p>
-          </li>
         </RouterLink>
         <RouterLink to="/contact">
-          <li>
             <p class="hover:underline">Contact</p>
-          </li>
         </RouterLink>
       </ul>
     </div>
