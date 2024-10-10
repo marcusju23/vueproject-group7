@@ -61,3 +61,11 @@ p {
 .add-to-cart-btn {
     @apply bg-neutral-800 text-white py-2 px-4 mt-2 rounded hover:bg-stone-600;
 }
+
+footer {
+    @apply bg-neutral-800;
+}
+
+footer .primary-footer {
+    @apply flex space-x-2 p-2  text-white text-center;
+}
