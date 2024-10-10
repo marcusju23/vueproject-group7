@@ -6,7 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const EXTERNAL_API_BASE_URL = 'https://api.escuelajs.co/api/v1/products';
+const EXTERNAL_API_BASE_URL = 'https://fakestoreapi.com/products';
 
 app.get('/api/products', async (req, res) => {
     try {
