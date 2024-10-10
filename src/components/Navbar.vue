@@ -1,9 +1,9 @@
 <template>
   <nav>
-    <ul class="flex space-x-4 p-4 bg-gray-800 text-white">
+    <ul class="flex space-x-4 p-4 bg-neutral-800 text-white">
       <li class="relative">
-        <button @click="toggleDropdown" class="hover:text-gray-300 focus:outline-none">Menu</button>
-        <ul v-if="isDropdownOpen" class="absolute left-0 mt-2 bg-gray-800 text-white shadow-lg">
+        <button @click="toggleDropdown">Menu</button>
+        <ul v-if="isDropdownOpen" class="absolute left-0 mt-2 bg-neutral-800 text-white shadow-lg">
           <li><RouterLink active-class="active" to="/" class="menu-item">Home</RouterLink></li>
           <li><RouterLink active-class="active" to="/contact" class="menu-item">Contact</RouterLink></li>
           <li><RouterLink active-class="active" to="/about" class="menu-item">About</RouterLink></li>

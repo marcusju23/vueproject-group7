@@ -2,36 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    @apply text-sm leading-5;
+}
+
+p {
+    @apply break-words font-light text-left;
+}
+
 .active {
-    font-weight: bold;
-    color: beige;
+    @apply font-bold text-amber-100;
 }
 
 .menu-item {
-    @apply block px-4 py-2 hover:bg-gray-700;
+    @apply block px-4 py-2 hover:bg-neutral-700;
 }
 
 .product-list {
-    display: flex;
-    flex-wrap: wrap;
+    @apply flex flex-wrap;
 }
 
 .product-card {
-    border: 1px solid #ccc;
-    padding: 16px;
-    margin: 16px;
-    text-align: center;
+    @apply border border-gray-300 p-1 m-1 text-center rounded-lg;
 }
 
 .product-image {
-    max-width: 100%;
-    height: auto;
+    @apply max-w-52 max-h-52 min-w-52 min-h-52 h-auto;
 }
 
-.primary-footer {
-    @apply flex space-x-2 p-2 bg-gray-800 text-white;
+.product-card:hover .product-description {
+    @apply text-stone-700 underline;
 }
 
-.container {
-    @apply text-center;
+.product-price {
+    @apply font-semibold text-emerald-500;
+}
+
+.product-description {
+    @apply font-semibold max-w-64 text-left;
+}
+
+.product-description::first-letter {
+    text-transform: uppercase;
+}
+
+.product-category {
+    @apply max-w-52 break-words font-extrabold text-left;
+}
+
+.product-title {
+    @apply max-w-52 break-words font-extrabold text-left
+}
+
+.product-rating {
+    @apply max-w-52 break-words font-extrabold text-left;
+}
+
+.add-to-cart-btn {
+    @apply bg-neutral-800 text-white py-2 px-4 mt-2 rounded hover:bg-stone-600;
 }
