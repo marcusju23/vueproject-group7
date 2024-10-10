@@ -1,25 +1,28 @@
 <template>
   <div class="product-list">
-    <ProductCard v-for="product in products" :key="product.id" :product="product" />
+    <ProductCard v-for="(product, index) in products" :key="index" :product="product"/>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { apiService } from '@/api/apiService.js';
 import ProductCard from '@/components/ProductCard.vue';
+import { apiService } from '@/api/apiService';
 
-// Reactive products array
+
 const products = ref([]);
 
-// Fetch products when the component is mounted
+
 onMounted(async () => {
   try {
-    const fetchedProducts = await apiService.getProducts();
-    console.log(fetchedProducts); // Check if products are being fetched
-    products.value = fetchedProducts; // Assign fetched products to reactive array
+    const data = await apiService.getProducts();
+    if (Array.isArray(data)) {
+      products.value = data;
+    } else {
+      console.error('Unexpected data format:', data);
+    }
   } catch (error) {
-    console.error('Error fetching products:', error); // Catch and log any errors
+    console.error('Error fetching products:', error);
   }
 });
 </script>

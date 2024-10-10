@@ -24,14 +24,37 @@
 }
 
 .product-image {
-    max-width: 100%;
-    height: auto;
+    @apply max-w-52 max-h-52 min-w-52 min-h-52 h-auto;
+}
+
+.product-card:hover .product-description {
+    @apply text-stone-700 underline;
+}
+
+.product-price {
+    @apply font-semibold text-emerald-500;
+}
+
+.product-description {
+    @apply font-semibold max-w-64 text-left;
+}
+
+.product-description::first-letter {
+    text-transform: uppercase;
+}
+
+.product-category {
+    @apply max-w-52 break-words font-extrabold text-left;
+}
+
+.product-title {
+    @apply max-w-52 break-words font-extrabold text-left
+}
+
+.product-rating {
+    @apply max-w-52 break-words font-extrabold text-left;
 }
 
 .primary-footer {
     @apply flex space-x-2 p-2 bg-gray-800 text-white;
-}
-
-.container {
-    @apply text-center;
 }
