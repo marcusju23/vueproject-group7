@@ -1,28 +1,37 @@
 <template>
-  <div class="product-list">
-    <ProductCard v-for="(product, index) in products" :key="index" :product="product"/>
+  <div>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+      <ProductCard
+          v-for="product in filteredProducts"
+          :key="product.id"
+          :product="product"
+      />
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import {ref, computed, onMounted} from 'vue';
 import ProductCard from '@/components/ProductCard.vue';
-import { apiService } from '@/api/apiService';
+import {apiService} from '@/api/apiService';
 
+const props = defineProps({
+  searchQuery: {
+    type: String,
+    default: ''
+  }
+});
 
 const products = ref([]);
 
-
 onMounted(async () => {
-  try {
-    const data = await apiService.getProducts();
-    if (Array.isArray(data)) {
-      products.value = data;
-    } else {
-      console.error('Unexpected data format:', data);
-    }
-  } catch (error) {
-    console.error('Error fetching products:', error);
-  }
+  const data = await apiService.getProducts();
+  products.value = data;
+});
+
+const filteredProducts = computed(() => {
+  return products.value.filter(product =>
+      product.title.toLowerCase().includes(props.searchQuery.toLowerCase())
+  );
 });
 </script>
