@@ -1,9 +1,13 @@
 <template>
-  <main>
+  <header>
     <Navbar></Navbar>
+  </header>
+  <main>
     <RouterView />
-    <Footer></Footer>
   </main>
+  <footer>
+    <Footer></Footer>
+  </footer>
 </template>
 
 <script setup>
