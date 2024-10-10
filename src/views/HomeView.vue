@@ -7,12 +7,14 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
 import ProductCard from '@/components/ProductCard.vue';
 import { apiService } from '@/api/apiService';
+import Footer from "@/components/Footer.vue";
 
 const categoryProducts = ref({});
 
