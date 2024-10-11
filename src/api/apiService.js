@@ -7,7 +7,7 @@ export const apiService = {
         return await response.json();
     },
     async getProductById(id) {
-        const response = await fetch(`${API_URL}/${id}`);
+        const response = await fetch(`${API_URL}/products/${id}`);
         return await response.json();
     },
     
