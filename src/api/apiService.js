@@ -35,6 +35,6 @@ export const apiService = {
             headers: { 'Content-Type': 'application/json' }
         });
         return await response.json();
-    }
+    },
 };
 
