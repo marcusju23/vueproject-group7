@@ -7,10 +7,10 @@ export const apiService = {
         return await response.json();
     },
     async getProductById(id) {
-        const response = await fetch(`${API_URL}/products/${id}`);
+        const response = await fetch(`${API_URL}/${id}`);
         return await response.json();
     },
-
+    
     async createOrder(orderData) {
         const response = await fetch(ORDER_URL, {
             method: 'POST',
