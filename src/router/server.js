@@ -6,11 +6,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const EXTERNAL_API_BASE_URL = 'https://fakestoreapi.com/products';
+const EXTERNAL_API_BASE_URL = 'https://fakestoreapi.com';
 
 app.get('/api/products', async (req, res) => {
     try {
-        const response = await axios.get(`${EXTERNAL_API_BASE_URL}`);
+        const response = await axios.get(`${EXTERNAL_API_BASE_URL}/products`);
         res.json(response.data);
     } catch (error) {
         console.error('Error fetching products:', error);
@@ -21,7 +21,7 @@ app.get('/api/products', async (req, res) => {
 app.get('/api/products/:id', async (req, res) => {
     const productId = req.params.id;
     try {
-        const response = await axios.get(`${EXTERNAL_API_BASE_URL}/${productId}`);
+        const response = await axios.get(`${EXTERNAL_API_BASE_URL}/products/${productId}`);
         res.json(response.data);
     } catch (error) {
         console.error('Error fetching product:', error);

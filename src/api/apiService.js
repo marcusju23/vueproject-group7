@@ -1,13 +1,13 @@
-const API_URL = 'http://localhost:4000/api/products';
+const API_URL = 'http://localhost:4000/api';
 const ORDER_URL = 'http://localhost:4000/api/orders';
 
 export const apiService = {
     async getProducts() {
-        const response = await fetch(`${API_URL}`);
+        const response = await fetch(`${API_URL}/products`);
         return await response.json();
     },
     async getProductById(id) {
-        const response = await fetch(`${API_URL}/${id}`);
+        const response = await fetch(`${API_URL}/products/${id}`);
         return await response.json();
     },
 
