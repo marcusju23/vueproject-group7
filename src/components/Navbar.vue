@@ -81,7 +81,6 @@ const filteredResults = computed(() => {
   });
 });
 
-
 function goToProduct(id) {
   router.push(`/product/${id}`);
 }
