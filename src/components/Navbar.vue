@@ -1,7 +1,6 @@
 <template>
   <nav class="flex justify-between items-center p-4 bg-neutral-800 text-white">
     <div class="flex items-center space-x-4">
-
       <ul class="flex space-x-4">
         <li class="relative">
           <button @click="toggleDropdown" class="hover:text-gray-300 focus:outline-none">Menu</button>
@@ -18,8 +17,6 @@
           </ul>
         </li>
       </ul>
-
-
       <div class="relative">
         <input
             v-model="searchQuery"
@@ -29,16 +26,19 @@
             class="w-64 px-4 py-2 rounded-lg bg-neutral-700 text-white placeholder-gray-400 focus:outline-none focus:ring focus:ring-green-500"
         />
 
-        <!-- Search Results Dropdown -->
         <ul v-if="filteredResults.length > 0"
-            class="absolute mt-2 w-64 bg-neutral-700 rounded-lg shadow-lg max-h-48 overflow-y-auto">
+            class="absolute mt-2 w-96 bg-white rounded-lg shadow-lg max-h-48 overflow-y-auto z-10">
           <li
               v-for="product in filteredResults"
               :key="product.id"
               @click="goToProduct(product.id)"
-              class="px-4 py-2 cursor-pointer hover:bg-neutral-600 text-white"
+              class="px-4 py-2 flex items-center cursor-pointer hover:bg-gray-100 text-black"
           >
-            {{ product.title }}
+            <img :src="product.image" alt="Product image" class="w-12 h-12 object-cover mr-4 rounded" />
+            <div class="flex-1">
+              <p class="text-gray-900">{{ product.title }}</p>
+              <p class="text-gray-600 text-sm">${{ product.price }}</p>
+            </div>
           </li>
         </ul>
       </div>
@@ -58,7 +58,6 @@ const router = useRouter();
 
 const products = ref([]);
 
-
 onMounted(async () => {
   try {
     const data = await apiService.getProducts();
@@ -68,7 +67,6 @@ onMounted(async () => {
     console.error('Error loading products:', error);
   }
 });
-
 
 const filteredResults = computed(() => {
   if (!searchQuery.value) return [];
@@ -89,6 +87,3 @@ function toggleDropdown() {
   isDropdownOpen.value = !isDropdownOpen.value;
 }
 </script>
-
-
-
