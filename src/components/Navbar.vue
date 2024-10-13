@@ -1,6 +1,7 @@
 <template>
   <nav class="flex justify-between items-center p-4 bg-neutral-800 text-white">
     <div class="flex items-center space-x-4">
+
       <ul class="flex space-x-4">
         <li class="relative">
           <button @click="toggleDropdown" class="hover:text-gray-300 focus:outline-none">Menu</button>
@@ -17,14 +18,16 @@
           </ul>
         </li>
       </ul>
+
       <div class="relative">
         <input
             v-model="searchQuery"
             @input="emitSearchQuery"
             type="text"
             placeholder="Search for products..."
-            class="w-64 px-4 py-2 rounded-lg bg-neutral-700 text-white placeholder-gray-400 focus:outline-none focus:ring focus:ring-green-500"
+            class="w-96 px-4 py-2 rounded-lg bg-neutral-700 text-white placeholder-gray-400 focus:outline-none focus:ring focus:ring-green-500"
         />
+
 
         <ul v-if="filteredResults.length > 0"
             class="absolute mt-2 w-96 bg-white rounded-lg shadow-lg max-h-48 overflow-y-auto z-10">
@@ -58,6 +61,7 @@ const router = useRouter();
 
 const products = ref([]);
 
+
 onMounted(async () => {
   try {
     const data = await apiService.getProducts();
@@ -67,6 +71,7 @@ onMounted(async () => {
     console.error('Error loading products:', error);
   }
 });
+
 
 const filteredResults = computed(() => {
   if (!searchQuery.value) return [];
@@ -79,9 +84,11 @@ const filteredResults = computed(() => {
   });
 });
 
+
 function goToProduct(id) {
   router.push(`/product/${id}`);
 }
+
 
 function toggleDropdown() {
   isDropdownOpen.value = !isDropdownOpen.value;
