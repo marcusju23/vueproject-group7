@@ -86,6 +86,8 @@ const filteredResults = computed(() => {
 
 
 function goToProduct(id) {
+  searchQuery.value = '';
+  isDropdownOpen.value = false;
   router.push(`/product/${id}`);
 }
 
