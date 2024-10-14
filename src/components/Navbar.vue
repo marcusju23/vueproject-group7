@@ -56,7 +56,6 @@ import {apiService} from '@/api/apiService';
 
 const searchQuery = ref('');
 const isDropdownOpen = ref(false);
-const emit = defineEmits(['updateSearchQuery']);
 const router = useRouter();
 
 const products = ref([]);
