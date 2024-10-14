@@ -1,6 +1,6 @@
 <template>
-  <div class="container mx-auto">
-    <div class="container mt-8" v-for="(productsInCategory, category) in categoryProducts" :key="category">
+  <div class="max-w-full px-4">
+    <div class="mt-8" v-for="(productsInCategory, category) in categoryProducts" :key="category">
       <h3 class="category-title text-2xl">{{ category }}</h3>
       <div class="flex flex-wrap">
         <ProductCard v-for="(product, index) in productsInCategory" :key="index" :product="product" />
@@ -10,31 +10,26 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import {ref, computed, onMounted} from 'vue';
 import ProductCard from '@/components/ProductCard.vue';
-import { apiService } from '@/api/apiService';
+import {apiService} from '@/api/apiService';
+
+const props = defineProps({
+  searchQuery: {
+    type: String,
+    default: ''
+  }
+});
+
+const products = ref([]);
 
 const categoryProducts = ref({});
 
 onMounted(async () => {
-  const data = await fetchProducts();
-  categoryProducts.value = groupProductsByCategory(data);
+  const data = await apiService.getProducts();
+  products.value = data;
+  categoryProducts.value = groupProductsByCategory(products.value);
 });
-
-const fetchProducts = async () => {
-  try {
-    const data = await apiService.getProducts();
-    if (Array.isArray(data)) {
-      return data;
-    } else {
-      console.error("Unexpected data format:", data);
-      return [];
-    }
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    return [];
-  }
-};
 
 const groupProductsByCategory = (products) => {
   return products.reduce((grouped, product) => {
@@ -46,4 +41,10 @@ const groupProductsByCategory = (products) => {
     return grouped;
   }, {});
 };
+
+const filteredProducts = computed(() => {
+  return products.value.filter(product =>
+      product.title.toLowerCase().includes(props.searchQuery.toLowerCase())
+  );
+});
 </script>
