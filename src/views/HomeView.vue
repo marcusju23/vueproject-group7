@@ -1,11 +1,10 @@
 <template>
-  <div>
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-      <ProductCard
-          v-for="product in filteredProducts"
-          :key="product.id"
-          :product="product"
-      />
+  <div class="container mx-auto">
+    <div class="container mt-8" v-for="(productsInCategory, category) in categoryProducts" :key="category">
+      <h3 class="category-title text-2xl">{{ category }}</h3>
+      <div class="flex flex-wrap">
+        <ProductCard v-for="(product, index) in productsInCategory" :key="index" :product="product" />
+      </div>
     </div>
   </div>
 </template>
@@ -24,10 +23,24 @@ const props = defineProps({
 
 const products = ref([]);
 
+const categoryProducts = ref({});
+
 onMounted(async () => {
   const data = await apiService.getProducts();
   products.value = data;
+  categoryProducts.value = groupProductsByCategory(products.value);
 });
+
+const groupProductsByCategory = (products) => {
+  return products.reduce((grouped, product) => {
+    const categoryName = product.category;
+    if (!grouped[categoryName]) {
+      grouped[categoryName] = [];
+    }
+    grouped[categoryName].push(product);
+    return grouped;
+  }, {});
+};
 
 const filteredProducts = computed(() => {
   return products.value.filter(product =>
