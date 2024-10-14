@@ -1,6 +1,6 @@
 <template>
-  <div class="container mx-auto">
-    <div class="container mt-8" v-for="(productsInCategory, category) in categoryProducts" :key="category">
+  <div class="max-w-full px-4">
+    <div class="mt-8" v-for="(productsInCategory, category) in categoryProducts" :key="category">
       <h3 class="category-title text-2xl">{{ category }}</h3>
       <div class="flex flex-wrap">
         <ProductCard v-for="(product, index) in productsInCategory" :key="index" :product="product" />
