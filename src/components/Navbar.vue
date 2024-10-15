@@ -10,10 +10,10 @@
           </button>
           <ul v-if="isDropdownOpen" class="absolute left-0 mt-2 bg-neutral-800 text-white shadow-lg">
             <li>
-              <RouterLink active-class="active" to="/about" class="menu-item">About</RouterLink>
+              <RouterLink @click="toggleDropdown" to="/about" class="menu-item">About</RouterLink>
             </li>
             <li>
-              <RouterLink active-class="active" to="/contact" class="menu-item">Contact</RouterLink>
+              <RouterLink @click="toggleDropdown" to="/contact" class="menu-item">Contact</RouterLink>
             </li>
           </ul>
         </li>
