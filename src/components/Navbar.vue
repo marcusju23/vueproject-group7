@@ -10,10 +10,10 @@
               <RouterLink active-class="active" to="/" class="menu-item">Home</RouterLink>
             </li>
             <li>
-              <RouterLink active-class="active" to="/contact" class="menu-item">Contact</RouterLink>
+              <RouterLink active-class="active" to="/about" class="menu-item">Contact</RouterLink>
             </li>
             <li>
-              <RouterLink active-class="active" to="/about" class="menu-item">About</RouterLink>
+              <RouterLink active-class="active" to="/contact" class="menu-item">About</RouterLink>
             </li>
           </ul>
         </li>
@@ -94,4 +94,13 @@ function goToProduct(id) {
 function toggleDropdown() {
   isDropdownOpen.value = !isDropdownOpen.value;
 }
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (event) => {
+  const dropdownButton = document.querySelector('button');
+  const dropdownMenu = document.querySelector('ul.absolute');
+  if (!dropdownButton.contains(event.target) && dropdownMenu && !dropdownMenu.contains(event.target)) {
+    isDropdownOpen.value = false;
+  }
+});
 </script>
