@@ -93,6 +93,10 @@
         </a>
       </div>
     </div>
-
   </div>
+  <Footer/>
 </template>
+
+<script setup>
+import Footer from "@/components/Footer.vue";
+</script>
