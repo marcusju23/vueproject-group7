@@ -11,7 +11,7 @@
     <div class="bg-white shadow-lg rounded-lg p-6 max-w-2xl mx-auto">
       <form @submit.prevent="submitForm">
         <div class="mb-4">
-          <label for="name" class="block text-sm font-medium text-gray-700">Your Name</label>
+          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
           <input
               type="text"
               v-model="name"
@@ -23,7 +23,7 @@
         </div>
 
         <div class="mb-4">
-          <label for="email" class="block text-sm font-medium text-gray-700">Your Email</label>
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
           <input
               type="email"
               v-model="email"
@@ -35,7 +35,7 @@
         </div>
 
         <div class="mb-6">
-          <label for="message" class="block text-sm font-medium text-gray-700">Your Message</label>
+          <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
           <textarea
               v-model="message"
               id="message"
