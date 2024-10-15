@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-neutral-700 mt-8">
+  <footer class="bg-neutral-800 mt-8">
     <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
       <span class="text-sm text-white sm:text-center">
         <img class="inline w-6 h-6 mx-2" src="@/components/icons/github-mark-white.png" alt="GitHub Icon"/>
