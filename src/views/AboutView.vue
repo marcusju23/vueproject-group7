@@ -3,7 +3,8 @@
     <div class="max-w-4xl mx-auto text-center">
       <h1 class="text-4xl font-bold mb-6">About Us</h1>
       <p class="text-lg leading-relaxed mb-8">
-        Welcome to our store! We are a team of dedicated developers who have worked hard to create this platform for you to enjoy and use. Below is more information about us and our goals.      </p>
+        Welcome to our store! We are a team of dedicated developers who have worked hard to create this platform for you
+        to enjoy and use. Below is more information about us and our goals. </p>
     </div>
 
     <div class="bg-white shadow-lg rounded-lg p-6 max-w-4xl mx-auto">
@@ -17,7 +18,7 @@
               class="rounded-full mx-auto w-28 h-28 object-cover mb-4"
           />
           <h3 class="text-xl font-semibold mb-2">
-            Daniel<br />Bäckberg
+            Daniel<br/>Bäckberg
           </h3>
           <p class="text-gray-700">Product Owner</p>
         </div>
@@ -29,7 +30,7 @@
               class="rounded-full mx-auto w-28 h-28 object-cover mb-4"
           />
           <h3 class="text-xl font-semibold mb-2">
-            Marcus<br />Olsson
+            Marcus<br/>Olsson
           </h3>
           <p class="text-gray-700">Scrum Master</p>
         </div>
@@ -41,7 +42,7 @@
               class="rounded-full mx-auto w-28 h-28 object-cover mb-4"
           />
           <h3 class="text-xl font-semibold mb-2">
-            Dennis<br />Staffansson
+            Dennis<br/>Staffansson
           </h3>
           <p class="text-gray-700">Developer</p>
         </div>
@@ -53,7 +54,7 @@
               class="rounded-full mx-auto w-28 h-28 object-cover mb-4"
           />
           <h3 class="text-xl font-semibold mb-2">
-            Rishad<br />Mahmudi
+            Rishad<br/>Mahmudi
           </h3>
           <p class="text-gray-700">Developer</p>
         </div>
@@ -63,8 +64,35 @@
     <div class="max-w-4xl mx-auto text-center mt-10">
       <h2 class="text-3xl font-semibold mb-4">Our Mission</h2>
       <p class="text-lg leading-relaxed">
-        Our mission is to create innovative solutions that meet the needs of our users. We believe in the power of collaboration and strive to deliver high-quality results.
+        Our mission is to create innovative solutions that meet the needs of our users. Through the use of our amazing online store,
+        you can easily browse and find products that fit your needs. We as a team believe in the power of
+        collaboration and strive to deliver high-quality results and will always strive to make our customers happy.
       </p>
     </div>
+    <div class="mt-8 text-center">
+      <h2 class="text-3xl font-semibold mb-4">Follow Us</h2>
+      <div class="flex justify-center space-x-4">
+        <a href="https://www.youtube.com/watch?v=h9uFQv3t1AU" target="_blank"
+           class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300 transition ease-in-out duration-150">
+          YouTube
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=h9uFQv3t1AU" target="_blank"
+           class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-600 focus:outline-none focus:ring focus:ring-pink-300 transition ease-in-out duration-150">
+          Instagram
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=h9uFQv3t1AU" target="_blank"
+           class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 transition ease-in-out duration-150">
+          Twitter
+        </a>
+
+        <a href="https://www.youtube.com/watch?v=h9uFQv3t1AU" target="_blank"
+           class="bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-800 focus:outline-none focus:ring focus:ring-blue-400 transition ease-in-out duration-150">
+          Facebook
+        </a>
+      </div>
+    </div>
+
   </div>
 </template>
