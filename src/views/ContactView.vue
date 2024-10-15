@@ -3,7 +3,8 @@
     <div class="max-w-4xl mx-auto text-center">
       <h1 class="text-4xl font-bold mb-6">Contact Us</h1>
       <p class="text-lg leading-relaxed mb-8">
-        Got questions? We'd love to hear from you! Fill out the form below, and we'll get back to you as soon as possible.
+        Got questions? We'd love to hear from you! Fill out the form below, and we'll get back to you as soon as
+        possible.
       </p>
     </div>
 
@@ -57,7 +58,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import {ref} from 'vue';
 
 const name = ref('');
 const email = ref('');
