@@ -1,11 +1,17 @@
 <template>
-  <main>
-    <Navbar />
-    <RouterView />
-  </main>
+  <div>
+    <Navbar @updateSearchQuery="updateSearchQuery"/>
+    <router-view :searchQuery="searchQuery"/>
+  </div>
 </template>
 
 <script setup>
-import Navbar from "@/components/Navbar.vue";
-import {RouterView} from 'vue-router';
+import {ref} from 'vue';
+import Navbar from '@/components/Navbar.vue';
+
+const searchQuery = ref('');
+
+function updateSearchQuery(query) {
+  searchQuery.value = query;
+}
 </script>
