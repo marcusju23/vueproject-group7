@@ -18,6 +18,10 @@ p {
     @apply block px-4 py-2 hover:bg-neutral-700;
 }
 
+.product-list {
+    @apply flex flex-wrap;
+}
+
 .product-card {
     @apply border border-gray-300 p-1 m-1 text-center rounded-lg;
 }
