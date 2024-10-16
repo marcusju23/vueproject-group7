@@ -34,6 +34,72 @@
       </form>
     </div>
   </div>
+  <!-- FAQs Section to press footer down-->
+  <div class="bg-white shadow-lg rounded-lg p-6 max-w-2xl mx-auto mb-8">
+    <h2 class="text-2xl mb-4">Frequently Asked Questions</h2>
+    <ul>
+      <li class="mb-2">
+        <strong>Q: How can I place an order?</strong><br />
+        A: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+      </li>
+      <li class="mb-2">
+        <strong>Q: What payment methods do you accept?</strong><br />
+        A: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+      </li>
+      <li class="mb-2">
+        <strong>Q: Can I track my order?</strong><br />
+        A: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+      </li>
+      <li class="mb-2">
+        <strong>Q: What is your return policy?</strong><br />
+        A: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+      </li>
+      <li class="mb-2">
+        <strong>Q: How can I contact customer service?</strong><br />
+        A: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+      </li>
+      <li class="mb-2">
+        <strong>Q: Do you offer international shipping?</strong><br />
+        A: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+      </li>
+      <li class="mb-2">
+        <strong>Q: How long does shipping take?</strong><br />
+        A: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+      </li>
+      <li class="mb-2">
+        <strong>Q: Can I change or cancel my order after it's been placed?</strong><br />
+        A: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+      </li>
+      <li class="mb-2">
+        <strong>Q: What should I do if I receive a defective item?</strong><br />
+        A: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+      </li>
+      <li class="mb-2">
+        <strong>Q: Do you offer gift cards?</strong><br />
+        A: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+      </li>
+      <li class="mb-2">
+        <strong>Q: How can I create an account?</strong><br />
+        A: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+      </li>
+      <li class="mb-2">
+        <strong>Q: What if I forget my password?</strong><br />
+        A: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+      </li>
+      <li class="mb-2">
+        <strong>Q: Do you have a size guide?</strong><br />
+        A: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+      </li>
+      <li class="mb-2">
+        <strong>Q: Can I return items purchased on sale?</strong><br />
+        A: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+      </li>
+      <li class="mb-2">
+        <strong>Q: How can I provide feedback about my shopping experience?</strong><br />
+        A: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script setup>
