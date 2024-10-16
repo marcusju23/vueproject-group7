@@ -38,9 +38,9 @@
     </div>
     <div class="flex items-right cart-container">
         <div class="relative">
-        <button @click="toggleCart" class="hover:text-gray-300 focus:outline-none cart-btn">
+          <button @click="toggleCart" class="hover:text-gray-300 focus:outline-none cart-btn">
           <img class="max-h-9" src="@/components/icons/shopping-cart.png" alt="Cart">
-        </button>
+          </button>
       <div
           v-if="isCartOpen" 
           class=" z-50 absolute right-[-45%] top-14 w-max  text-white backdrop-blur-lg bg-black/30">
@@ -50,27 +50,25 @@
           :key="cartProduct.id">
             <li>
               <div class="flex">
-              <img class="p-4 max-h-24" :src="cartProduct.image" :alt="cartProduct.title">
+                <img class="p-4 max-h-24" :src="cartProduct.image" :alt="cartProduct.title">
 
-              <div class="p-4">
-              <p class="text-xl">{{ cartProduct.title }}</p>
-              <p class="text-xl bold">${{ cartProduct.price }}</p>
-              </div>
+                <div class="p-4">
+                  <p class="text-xl">{{ cartProduct.title }}</p>
+                  <p class="text-xl bold">${{ cartProduct.price }}</p>
+                </div>
               </div>
             </li>
           </ul>
 
-          <div 
-            class="flex justify-center content-center flex-col"
-          >
+          <div class="flex justify-center content-center flex-col">
             <p class="text-white p-4 text-2xl">Total Price : ${{ totalCartPrice }}</p>
-          <div >
+          <div>
           </div>
             <button class="text-white w-100 p-4 backdrop-blur-md bg-back/30">
               Checkout
             </button>
           </div>
-      </div>
+          </div>
         </div>
     </div>
   </nav>
@@ -88,16 +86,12 @@ const isCartOpen = ref(false);
 const router = useRouter();
 
 const cartProducts = ref([])
-
-
 const products = ref([]);
 
 
 const totalCartPrice = computed(() => {
   const sumOfProducts = cartStore.products.reduce((total, product) => total + product.price, 0);
-
   const toTwoDecimals = sumOfProducts.toFixed(2);
-
   return Number.parseFloat(toTwoDecimals);
 })
 
