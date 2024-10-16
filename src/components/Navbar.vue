@@ -36,21 +36,29 @@
         </ul>
       </div>
     </div>
-    <div class="flex items-right">
+    <div class="flex items-right cart-container">
         <div class="relative">
-        <button @click="toggleCart" class="hover:text-gray-300 focus:outline-none">
+        <button @click="toggleCart" class="hover:text-gray-300 focus:outline-none cart-btn">
           <img class="max-h-9" src="@/components/icons/shopping-cart.png" alt="Cart">
         </button>
-          <div v-if="isCartOpen" class="absolute left-0 mt-2 bg-neutral-800 text-white shadow-lg">
-            Our Product
-          </div>
+          <ul v-if="isCartOpen" class="z-50 absolute right-0  w-[300px] bg-neutral-800 text-white shadow-lg">
+            <li>
+              <div class="flex">
+              <img class="max-h-24" :src="cartProduct.image" :alt="cartProduct.title">
+              <div class="p-4">
+              <p>{{ cartProduct.title }}</p>
+              <p>{{ cartProduct.price }}</p>
+              </div>
+              </div>
+            </li>
+          </ul>
         </div>
     </div>
   </nav>
 </template>
 
 <script setup>
-import {ref, computed, onMounted} from 'vue';
+import {ref, computed, onMounted, watchEffect} from 'vue';
 import {useRouter} from 'vue-router';
 import {apiService} from '@/api/apiService';
 
@@ -59,7 +67,10 @@ const isDropdownOpen = ref(false);
 const isCartOpen = ref(false);
 const router = useRouter();
 
+const cartProduct = ref(JSON.parse(localStorage.getItem("addedToCart")))
+
 const products = ref([]);
+
 
 onMounted(async () => {
   try {
@@ -70,6 +81,7 @@ onMounted(async () => {
     console.error('Error loading products:', error);
   }
 });
+
 
 const filteredResults = computed(() => {
   if (!searchQuery.value) return [];
@@ -93,7 +105,7 @@ function toggleDropdown() {
 }
 
 function toggleCart() {
-  isCartOpen.value = !isDropdownOpen.value;
+  isCartOpen.value = !isCartOpen.value;
 }
 
 // Close dropdown when clicking outside
