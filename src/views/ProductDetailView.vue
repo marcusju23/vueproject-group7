@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, defineProps } from 'vue';
 import { useRoute } from 'vue-router';
 import { apiService } from '@/api/apiService.js';
 import ProductCard from "@/components/ProductCard.vue";
@@ -55,6 +55,13 @@ onMounted(() => {
 
 watch(() => route.params.id, (newId) => {
   fetchProduct(newId);
+});
+
+const props = defineProps({
+  searchQuery: {
+    type: String,
+    default: '',
+  },
 });
 
 async function fetchProduct(productId) {
