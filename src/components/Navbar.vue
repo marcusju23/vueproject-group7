@@ -37,11 +37,14 @@
       </div>
     </div>
     <div class="flex items-right">
-      <div class="relative">
-        <button class="hover:text-gray-300 focus:outline-none">
+        <div class="relative">
+        <button @click="toggleCart" class="hover:text-gray-300 focus:outline-none">
           <img class="max-h-9" src="@/components/icons/shopping-cart.png" alt="Cart">
         </button>
-      </div>
+          <div v-if="isCartOpen" class="absolute left-0 mt-2 bg-neutral-800 text-white shadow-lg">
+            Our Product
+          </div>
+        </div>
     </div>
   </nav>
 </template>
@@ -53,6 +56,7 @@ import {apiService} from '@/api/apiService';
 
 const searchQuery = ref('');
 const isDropdownOpen = ref(false);
+const isCartOpen = ref(false);
 const router = useRouter();
 
 const products = ref([]);
@@ -86,6 +90,10 @@ function goToProduct(id) {
 
 function toggleDropdown() {
   isDropdownOpen.value = !isDropdownOpen.value;
+}
+
+function toggleCart() {
+  isCartOpen.value = !isDropdownOpen.value;
 }
 
 // Close dropdown when clicking outside
