@@ -104,9 +104,20 @@ async function fetchRelatedProducts(currentProduct) {
 async function fetchNonRelatedProducts(currentProduct) {
   try {
     const products = await apiService.getProducts();
-    otherProducts.value = products.filter(p => p.category !== currentProduct.category && p.id !== currentProduct.id);
+    const filteredProducts = products.filter(
+        p => p.category !== currentProduct.category && p.id !== currentProduct.id
+    );
+    otherProducts.value = shuffleArray(filteredProducts);
   } catch (error) {
     console.error('Error fetching related products:', error);
   }
+}
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }
 </script>
