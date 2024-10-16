@@ -1,5 +1,5 @@
 <template>
-  <nav class="flex justify-between items-center p-4 bg-neutral-800 text-white">
+  <nav class="z-50 sticky top-0 flex justify-between items-center p-4 backdrop-blur-md bg-black/25 text-white">
     <div class="flex items-center space-x-4">
       <ul class="flex space-x-4">
         <RouterLink active-class="active" to="/"><img class="max-h-7" src="@/components/icons/home-icon.png" alt="Home">
@@ -21,7 +21,7 @@
 
       <div class="relative">
         <input v-model="searchQuery" @input="emitSearchQuery" type="text" placeholder="Search for products..."
-            class="w-96 px-4 py-2 rounded-lg bg-neutral-700 text-white placeholder-gray-400 focus:outline-none
+            class="w-96 px-4 py-2 rounded-lg backdrop-blur-lg bg-black/30 text-white placeholder-gray-400 focus:outline-none
             focus:ring focus:ring-green-500"/>
         <ul v-if="filteredResults.length > 0"
             class="absolute mt-2 w-96 bg-white rounded-lg shadow-lg max-h-48 overflow-y-auto z-10">
@@ -43,7 +43,7 @@
         </button>
       <div
           v-if="isCartOpen" 
-          class=" z-50 absolute right-0 w-max  text-white backdrop-blur-lg bg-black/30">
+          class=" z-50 absolute right-[-45%] top-14 w-max  text-white backdrop-blur-lg bg-black/30">
 
           <ul
           v-for="cartProduct in cartStore.products " 
@@ -94,7 +94,11 @@ const products = ref([]);
 
 
 const totalCartPrice = computed(() => {
-  return cartStore.products.reduce((total, product) => total + product.price, 0)
+  const sumOfProducts = cartStore.products.reduce((total, product) => total + product.price, 0);
+
+  const toTwoDecimals = sumOfProducts.toFixed(2);
+
+  return Number.parseFloat(toTwoDecimals);
 })
 
 onMounted(async () => {
