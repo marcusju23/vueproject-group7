@@ -3,7 +3,7 @@
     <div class="content mt-16 flex items-center justify-center">
       <div class="flex" v-if="product">
         <div>
-          <img class="max-w-sm mb-6" :src="product.image" alt="product" />
+          <img class="max-w-sm mb-32" :src="product.image" alt="product" />
         </div>
         <div class="relative ml-6 flex-1 flex flex-col">
           <h1 class="product-title mb-2">{{ product.title }}</h1>
@@ -28,11 +28,18 @@
 
   <div class="flex pt-10">
     <div class="max-w-full px-4">
-      <div class="mt-8">
         <h3 class="text-2xl">Related Products</h3>
         <div class="flex flex-wrap">
           <ProductCard v-for="(relatedProduct, index) in relatedProducts" :key="index" :product="relatedProduct"/>
         </div>
+    </div>
+  </div>
+
+  <div class="flex pt-10">
+    <div class="max-w-full px-4">
+      <h3 class="text-2xl">Other Products</h3>
+      <div class="flex flex-wrap">
+        <ProductCard v-for="(otherProducts, index) in otherProducts" :key="index" :product="otherProducts"/>
       </div>
     </div>
   </div>
@@ -48,6 +55,7 @@ const route = useRoute();
 const product = ref(null);
 const error = ref(false);
 const relatedProducts = ref([]);
+const otherProducts = ref([]);
 
 onMounted(() => {
   fetchProduct(route.params.id);
@@ -71,6 +79,7 @@ async function fetchProduct(productId) {
       product.value = data;
       error.value = false;
       await fetchRelatedProducts(data);
+      await fetchNonRelatedProducts(data);
     } else {
       error.value = true;
     }
@@ -84,6 +93,15 @@ async function fetchRelatedProducts(currentProduct) {
   try {
     const products = await apiService.getProducts();
     relatedProducts.value = products.filter(p => p.category === currentProduct.category && p.id !== currentProduct.id);
+  } catch (error) {
+    console.error('Error fetching related products:', error);
+  }
+}
+
+async function fetchNonRelatedProducts(currentProduct) {
+  try {
+    const products = await apiService.getProducts();
+    otherProducts.value = products.filter(p => p.category !== currentProduct.category && p.id !== currentProduct.id);
   } catch (error) {
     console.error('Error fetching related products:', error);
   }
