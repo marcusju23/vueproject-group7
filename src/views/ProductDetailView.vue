@@ -28,7 +28,7 @@
 
   <div class="flex pt-10">
     <div class="max-w-full px-4">
-        <h3 class="text-2xl">Related Products</h3>
+        <h3 class="text-2xl">Related products</h3>
         <div class="flex flex-wrap">
           <ProductCard v-for="(relatedProduct, index) in relatedProducts" :key="index" :product="relatedProduct"/>
         </div>
@@ -37,7 +37,7 @@
 
   <div class="flex pt-10">
     <div class="max-w-full px-4">
-      <h3 class="text-2xl">Other Products</h3>
+      <h3 class="text-2xl">Other products</h3>
       <div class="flex flex-wrap">
         <ProductCard v-for="(otherProducts, index) in otherProducts" :key="index" :product="otherProducts"/>
       </div>
