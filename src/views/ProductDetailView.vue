@@ -28,9 +28,10 @@
 
   <div class="flex pt-10">
     <div class="max-w-full px-4">
-        <h3 class="text-2xl">
-          Related products to <span class="capitalize font-semibold">{{ product.category }}</span>
-        </h3>
+      <h3 class="text-2xl" v-if="product">
+        Related products to <span class="capitalize font-semibold">{{ product.category }}</span>
+      </h3>
+      <div v-else>Loading...</div>
         <div class="flex flex-wrap">
           <ProductCard v-for="(relatedProduct, index) in relatedProducts" :key="index" :product="relatedProduct"/>
         </div>
