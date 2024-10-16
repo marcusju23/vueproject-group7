@@ -12,8 +12,9 @@
           <button @click="addProductToCart()" class="add-to-cart-btn">Add to Cart</button>
         </div>
       </div>
-    </div>
 
+
+    </div>
     <div v-else-if="error">
       <p>Product not found!</p>
     </div>
@@ -28,6 +29,7 @@
 import {ref, onMounted, watch, reactive, watchEffect} from 'vue';
 import {useRoute} from 'vue-router';
 import {apiService} from '@/api/apiService.js';
+import {cartStore} from '@/store/store.js';
 
 const route = useRoute();
 
@@ -38,7 +40,7 @@ const error = ref(false);
 
 function addProductToCart() {
     if(product.value) {
-      localStorage.setItem("addedToCart", JSON.stringify(product.value))
+      cartStore.addToCart(product.value);
     }
   }
 
@@ -60,6 +62,11 @@ async function fetchProduct(productId) {
 onMounted(() => {
   fetchProduct(route.params.id);
 });
+
+onMounted(() => {
+  cartStore.products = JSON.parse(localStorage.getItem("addedToCart")) || [];
+});
+
 
 watch(() => route.params.id, (newId) => {
   fetchProduct(newId);

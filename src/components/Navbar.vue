@@ -41,36 +41,61 @@
         <button @click="toggleCart" class="hover:text-gray-300 focus:outline-none cart-btn">
           <img class="max-h-9" src="@/components/icons/shopping-cart.png" alt="Cart">
         </button>
-          <ul v-if="isCartOpen" class="z-50 absolute right-0  w-[300px] bg-neutral-800 text-white shadow-lg">
+      <div
+          v-if="isCartOpen" 
+          class=" z-50 absolute right-0 w-max  text-white backdrop-blur-lg bg-black/30">
+
+          <ul
+          v-for="cartProduct in cartStore.products " 
+          :key="cartProduct.id">
             <li>
               <div class="flex">
-              <img class="max-h-24" :src="cartProduct.image" :alt="cartProduct.title">
+              <img class="p-4 max-h-24" :src="cartProduct.image" :alt="cartProduct.title">
+
               <div class="p-4">
-              <p>{{ cartProduct.title }}</p>
-              <p>{{ cartProduct.price }}</p>
+              <p class="text-xl">{{ cartProduct.title }}</p>
+              <p class="text-xl bold">${{ cartProduct.price }}</p>
               </div>
               </div>
             </li>
           </ul>
+
+          <div 
+            class="flex justify-center content-center flex-col"
+          >
+            <p class="text-white p-4 text-2xl">Total Price : ${{ totalCartPrice }}</p>
+          <div >
+          </div>
+            <button class="text-white w-100 p-4 backdrop-blur-md bg-back/30">
+              Checkout
+            </button>
+          </div>
+      </div>
         </div>
     </div>
   </nav>
 </template>
 
 <script setup>
-import {ref, computed, onMounted, watchEffect} from 'vue';
+import {ref, computed, onMounted, } from 'vue';
 import {useRouter} from 'vue-router';
 import {apiService} from '@/api/apiService';
+import { cartStore } from '@/store/store';
 
 const searchQuery = ref('');
 const isDropdownOpen = ref(false);
 const isCartOpen = ref(false);
 const router = useRouter();
 
-const cartProduct = ref(JSON.parse(localStorage.getItem("addedToCart")))
+const cartProducts = ref([])
+
 
 const products = ref([]);
 
+
+const totalCartPrice = computed(() => {
+  return cartStore.products.reduce((total, product) => total + product.price, 0)
+})
 
 onMounted(async () => {
   try {
@@ -81,7 +106,6 @@ onMounted(async () => {
     console.error('Error loading products:', error);
   }
 });
-
 
 const filteredResults = computed(() => {
   if (!searchQuery.value) return [];
