@@ -103,11 +103,18 @@
 </template>
 
 <script setup>
-import {ref} from 'vue';
+import {defineProps, ref} from 'vue';
 
 const name = ref('');
 const email = ref('');
 const message = ref('');
+
+const props = defineProps({
+  searchQuery: {
+    type: String,
+    default: '',
+  },
+});
 
 function submitForm() {
   alert(`Thank you, ${name.value}! We'll get back to you shortly.`);
