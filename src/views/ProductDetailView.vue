@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { apiService } from '@/api/apiService.js';
 import ProductCard from "@/components/ProductCard.vue";
@@ -50,8 +50,11 @@ const error = ref(false);
 const relatedProducts = ref([]);
 
 onMounted(() => {
-  const productId = route.params.id;
-  fetchProduct(productId);
+  fetchProduct(route.params.id);
+});
+
+watch(() => route.params.id, (newId) => {
+  fetchProduct(newId);
 });
 
 async function fetchProduct(productId) {
