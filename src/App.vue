@@ -1,6 +1,7 @@
 <template>
   <div>
     <Navbar @updateSearchQuery="updateSearchQuery"/>
+
     <router-view :searchQuery="searchQuery"/>
   </div>
   <Footer/>
