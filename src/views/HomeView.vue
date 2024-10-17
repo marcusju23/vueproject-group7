@@ -67,9 +67,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import { apiService } from '@/api/apiService';
+import {ref, onMounted} from 'vue';
+import {useRouter} from 'vue-router';
+import {apiService} from '@/api/apiService';
 
 const products = ref([]);
 const categoryProducts = ref({});
