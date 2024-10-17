@@ -24,7 +24,6 @@
         </div>
       </div>
     </div>
-    <Footer/>
   </div>
 </template>
 
@@ -32,7 +31,6 @@
 import {ref, computed, onMounted} from 'vue';
 import {useRouter} from 'vue-router';
 import ProductCard from '@/components/ProductCard.vue';
-import Footer from '@/components/Footer.vue';
 import {apiService} from '@/api/apiService';
 
 const products = ref([]);
