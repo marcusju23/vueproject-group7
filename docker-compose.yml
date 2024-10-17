@@ -5,6 +5,27 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
+    environment:
+      MONGO_URL: mongodb://mongo:27017/mydb
+    depends_on:
+      - mongo
     ports:
       - "4000:4000"
     command: npm start
+    networks:
+      - app-network
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-network
+
+volumes:
+  mongo-data:
+
+networks:
+  app-network:
