@@ -52,7 +52,7 @@ import { apiService } from '@/api/apiService';
 
 const products = ref([]);
 const categoryProducts = ref({});
-const searchQuery = ref('');
+const searchQuery = ref(''); // Using a local ref for searchQuery
 const router = useRouter();
 
 onMounted(async () => {
