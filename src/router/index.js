@@ -33,7 +33,15 @@ const router = createRouter({
             name: "NotFound",
             component: NotFoundView
         }
-    ]
+    ],
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition;
+        } else {
+            // Scroll to top for new route
+            return { top: 0 };
+        }
+    }
 })
 
 export default router
