@@ -5,7 +5,16 @@
         Explore Our Collection
       </h1>
 
-      <div v-for="(productsInCategory, category) in categoryProducts" :key="category" class="mb-16">
+      <div class="flex justify-center mb-8">
+        <input
+            v-model="searchQuery"
+            type="text"
+            placeholder="Filter Products..."
+            class="w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <div v-for="(productsInCategory, category) in filteredCategoryProducts" :key="category" class="mb-16">
         <h2 class="text-3xl font-bold text-gray-800 mb-8 capitalize">
           {{ category }}
         </h2>
@@ -50,7 +59,7 @@
     <footer class="bg-neutral-800 mt-8">
       <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
         <span class="text-sm text-white sm:text-center">
-          <img class="inline w-6 h-6 mx-2" src="@/components/icons/github-mark-white.png" alt="GitHub Icon"/>
+          <img class="inline w-6 h-6 mx-2" src="@/components/icons/github-mark-white.png" alt="GitHub Icon" />
           <a href="https://github.com/marcusju23/vueproject-group7" class="hover:underline">vueproject-group7</a>
         </span>
         <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-white sm:mt-0">
@@ -67,12 +76,14 @@
 </template>
 
 <script setup>
-import {ref, onMounted} from 'vue';
-import {useRouter} from 'vue-router';
-import {apiService} from '@/api/apiService';
+import { ref, computed, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import { apiService } from '@/api/apiService';
+import ProductCard from '@/components/ProductCard.vue';
 
 const products = ref([]);
 const categoryProducts = ref({});
+const searchQuery = ref('');
 const router = useRouter();
 
 onMounted(async () => {
@@ -91,6 +102,20 @@ const groupProductsByCategory = (products) => {
     return grouped;
   }, {});
 };
+const filteredCategoryProducts = computed(() => {
+  if (!searchQuery.value) return categoryProducts.value;
+
+  const query = searchQuery.value.toLowerCase();
+  const filteredProducts = {};
+
+  for (const category in categoryProducts.value) {
+    filteredProducts[category] = categoryProducts.value[category].filter((product) =>
+        product.title.toLowerCase().includes(query)
+    );
+  }
+
+  return filteredProducts;
+});
 
 const goToProduct = (productId) => {
   router.push(`/product/${productId}`);
