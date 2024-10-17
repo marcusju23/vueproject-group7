@@ -5,7 +5,14 @@ export const cartStore = reactive({
 
   addToCart(newProduct) {
     this.products.push(newProduct);
+  },
+
+  deleteFromCart(productID){
+    const updatedList = [...this.products];
+    updatedList.splice(productID, 1);
+    this.products = updatedList;
   }
+
 });
 
 watch(
@@ -15,3 +22,5 @@ watch(
   },
   { deep: true }
 );
+
+
