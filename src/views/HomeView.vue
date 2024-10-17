@@ -79,7 +79,6 @@
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { apiService } from '@/api/apiService';
-import ProductCard from '@/components/ProductCard.vue';
 
 const products = ref([]);
 const categoryProducts = ref({});
