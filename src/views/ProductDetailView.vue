@@ -67,20 +67,6 @@ function addProductToCart() {
     }
   }
 
-async function fetchProduct(productId) {
-  try {
-    const data = await apiService.getProductById(productId);
-    if (data) {
-      product.value = data;
-      error.value = false;
-    } else {
-      error.value = true;
-    }
-  } catch (err) {
-    console.error('Error fetching product details:', err);
-    error.value = true;
-  }
-}
 
 onMounted(() => {
   fetchProduct(route.params.id);
