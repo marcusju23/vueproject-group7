@@ -5,13 +5,21 @@
         Explore Our Collection
       </h1>
 
-      <div class="flex justify-center mb-8">
-        <input
-            v-model="searchQuery"
-            type="text"
-            placeholder="Filter Products..."
-            class="w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+      <div class="flex justify-center mb-8 space-x-4">
+        <button
+            v-for="category in categoryNames"
+            :key="category"
+            @click="filterByCategory(category)"
+            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+        >
+          {{ category }}
+        </button>
+        <button
+            @click="clearFilter"
+            class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
+        >
+          Show All
+        </button>
       </div>
 
       <div v-for="(productsInCategory, category) in filteredCategoryProducts" :key="category" class="mb-16">
@@ -20,7 +28,7 @@
         </h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <ProductCard v-for="(product, index) in productsInCategory" :key="index" :product="product"/>
+          <ProductCard v-for="(product, index) in productsInCategory" :key="index" :product="product" />
         </div>
       </div>
     </div>
@@ -28,20 +36,24 @@
 </template>
 
 <script setup>
-import {ref, computed, onMounted} from 'vue';
-import {useRouter} from 'vue-router';
+import { ref, computed, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import ProductCard from '@/components/ProductCard.vue';
-import {apiService} from '@/api/apiService';
+import { apiService } from '@/api/apiService';
 
 const products = ref([]);
 const categoryProducts = ref({});
-const searchQuery = ref('');
+const selectedCategory = ref('');
 const router = useRouter();
 
 onMounted(async () => {
   const data = await apiService.getProducts();
   products.value = data;
   categoryProducts.value = groupProductsByCategory(products.value);
+});
+
+const categoryNames = computed(() => {
+  return Object.keys(categoryProducts.value);
 });
 
 const groupProductsByCategory = (products) => {
@@ -56,19 +68,18 @@ const groupProductsByCategory = (products) => {
 };
 
 const filteredCategoryProducts = computed(() => {
-  if (!searchQuery.value) return categoryProducts.value;
-
-  const query = searchQuery.value.toLowerCase();
+  if (!selectedCategory.value) return categoryProducts.value; // If no category is selected, show all
   const filteredProducts = {};
-
-  for (const category in categoryProducts.value) {
-    filteredProducts[category] = categoryProducts.value[category].filter((product) =>
-        product.title.toLowerCase().includes(query)
-    );
-  }
-
+  filteredProducts[selectedCategory.value] = categoryProducts.value[selectedCategory.value] || [];
   return filteredProducts;
 });
+
+const filterByCategory = (category) => {
+  selectedCategory.value = category;
+};
+const clearFilter = () => {
+  selectedCategory.value = '';
+};
 
 const goToProduct = (productId) => {
   router.push(`/product/${productId}`);
