@@ -28,7 +28,9 @@
         </h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <ProductCard v-for="(product, index) in productsInCategory" :key="index" :product="product" />
+          <RouterLink v-for="(product, index) in productsInCategory" :key="index" :to="`/product/${product.id}`" class="no-underline">
+            <ProductCard :product="product" />
+          </RouterLink>
         </div>
       </div>
     </div>
@@ -68,7 +70,7 @@ const groupProductsByCategory = (products) => {
 };
 
 const filteredCategoryProducts = computed(() => {
-  if (!selectedCategory.value) return categoryProducts.value; // If no category is selected, show all
+  if (!selectedCategory.value) return categoryProducts.value;
   const filteredProducts = {};
   filteredProducts[selectedCategory.value] = categoryProducts.value[selectedCategory.value] || [];
   return filteredProducts;
