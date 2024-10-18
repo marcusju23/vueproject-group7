@@ -11,7 +11,7 @@
           <p class="product-description mb-4">{{ product.description }}</p>
           <div class="mt-auto text-right">
             <p class="product-price text-xl text-right">${{ product.price }}</p>
-            <button class="add-to-cart-btn">Add to Cart</button>
+            <button @click="addProductToCart()" class="add-to-cart-btn">Add to Cart</button>
           </div>
         </div>
       </div>
@@ -49,9 +49,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, defineProps } from 'vue';
-import { useRoute } from 'vue-router';
-import { apiService } from '@/api/apiService.js';
+import {ref, onMounted, watch, reactive, watchEffect, defineProps} from 'vue';
+import {useRoute} from 'vue-router';
+import {apiService} from '@/api/apiService.js';
+import {cartStore} from '@/store/store.js';
 import ProductCard from "@/components/ProductCard.vue";
 
 const route = useRoute();
@@ -60,9 +61,21 @@ const error = ref(false);
 const relatedProducts = ref([]);
 const otherProducts = ref([]);
 
+function addProductToCart() {
+    if(product.value) {
+      cartStore.addToCart(product.value);
+    }
+  }
+
+
 onMounted(() => {
   fetchProduct(route.params.id);
 });
+
+onMounted(() => {
+  cartStore.products = JSON.parse(localStorage.getItem("addedToCart")) || [];
+});
+
 
 watch(() => route.params.id, (newId) => {
   fetchProduct(newId);
