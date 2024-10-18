@@ -32,27 +32,27 @@
         Related products to <span class="capitalize font-semibold">{{ product.category }}</span>
       </h3>
       <div v-else>Loading...</div>
-        <div class="flex flex-wrap">
-          <ProductCard v-for="(relatedProduct, index) in relatedProducts" :key="index" :product="relatedProduct"/>
-        </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <ProductCard v-for="(relatedProduct, index) in relatedProducts" :key="index" :product="relatedProduct"/>
+      </div>
     </div>
   </div>
 
   <div class="flex pt-10">
     <div class="max-w-full px-4">
       <h3 class="text-2xl">Other products</h3>
-      <div class="flex flex-wrap">
-        <ProductCard v-for="(otherProducts, index) in otherProducts" :key="index" :product="otherProducts"/>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <ProductCard v-for="(otherProduct, index) in otherProducts" :key="index" :product="otherProduct"/>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import {ref, onMounted, watch, reactive, watchEffect, defineProps} from 'vue';
-import {useRoute} from 'vue-router';
-import {apiService} from '@/api/apiService.js';
-import {cartStore} from '@/store/store.js';
+import { ref, onMounted, watch, defineProps } from 'vue';
+import { useRoute } from 'vue-router';
+import { apiService } from '@/api/apiService.js';
+import { cartStore } from '@/store/store.js';
 import ProductCard from "@/components/ProductCard.vue";
 
 const route = useRoute();
@@ -62,20 +62,14 @@ const relatedProducts = ref([]);
 const otherProducts = ref([]);
 
 function addProductToCart() {
-    if(product.value) {
-      cartStore.addToCart(product.value);
-    }
+  if(product.value) {
+    cartStore.addToCart(product.value);
   }
-
+}
 
 onMounted(() => {
   fetchProduct(route.params.id);
 });
-
-onMounted(() => {
-  cartStore.products = JSON.parse(localStorage.getItem("addedToCart")) || [];
-});
-
 
 watch(() => route.params.id, (newId) => {
   fetchProduct(newId);
