@@ -46,20 +46,21 @@
         </button>
 
         <div v-if="isCartOpen" class="z-50 absolute right-[-45%] top-14 w-[400px] text-white backdrop-blur-lg bg-black/30">
-          <ul v-for="(cartProduct, index) in cartStore.products" :key="index">
-            <li>
-              <div class="flex items-center">
-                <img class="p-4 max-h-24" :src="cartProduct.image" :alt="cartProduct.title">
-                <div class="p-4 grow">
-                  <p class="text-xl">{{ cartProduct.title }}</p>
-                  <p class="text-xl bold">${{ cartProduct.price }}</p>
-                  <p>Quantity: {{ cartProduct.quantity }}</p>
+          <div class="max-h-[300px] overflow-y-auto"> <!-- Set max height and enable scrolling -->
+            <ul v-for="(cartProduct, index) in cartStore.products" :key="index">
+              <li>
+                <div class="flex items-center">
+                  <img class="p-4 max-h-24" :src="cartProduct.image" :alt="cartProduct.title">
+                  <div class="p-4 grow">
+                    <p class="text-xl">{{ cartProduct.title }}</p>
+                    <p class="text-xl bold">${{ cartProduct.price }}</p>
+                    <p>Quantity: {{ cartProduct.quantity }}</p>
+                  </div>
+                  <button @click="cartStore.deleteFromCart(index)" class="text-white bg-black/30 p-2 m-2 rounded">X</button>
                 </div>
-                <button @click="cartStore.deleteFromCart(index)" class="text-white bg-black/30 p-2 m-2 rounded">X</button>
-              </div>
-            </li>
-          </ul>
-
+              </li>
+            </ul>
+          </div>
           <div class="flex justify-center content-center flex-col">
             <p class="text-white p-4 text-2xl">Total Price : ${{ totalCartPrice }}</p>
             <div>
