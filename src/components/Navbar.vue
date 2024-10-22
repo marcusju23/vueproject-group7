@@ -68,6 +68,7 @@
           </div>
 
           <div class="p-4">
+            <p class="text-lg font-bold text-right mb-4">Total Price: ${{ totalCartPrice }}</p>
             <button class="text-white w-full py-3 bg-green-500 rounded hover:bg-green-600 transition">
               Checkout
             </button>
