@@ -149,4 +149,12 @@ function removeItem(index, event) {
   event.stopPropagation();
   cartStore.deleteFromCart(index);
 }
+
+document.addEventListener('click', (event) => {
+  const dropdownButton = document.querySelector('button');
+  const dropdownMenu = document.querySelector('ul.absolute');
+  if (!dropdownButton.contains(event.target) && dropdownMenu && !dropdownMenu.contains(event.target)) {
+    isDropdownOpen.value = false;
+  }
+});
 </script>
