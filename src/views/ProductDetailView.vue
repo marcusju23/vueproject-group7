@@ -3,15 +3,23 @@
     <div class="content mt-16 flex items-center justify-center">
       <div class="flex" v-if="product">
         <div>
-          <img class="max-w-sm mb-32" :src="product.image" alt="product" />
+          <img class="max-w-sm mb-32" :src="product.image" alt="product"/>
         </div>
         <div class="relative ml-6 flex-1 flex flex-col">
           <h1 class="product-title mb-2">{{ product.title }}</h1>
-          <p class="product-rating text-blue-700 mb-2">{{ product.rating?.rate }} / 5 ({{ product.rating?.count }} reviews)</p>
+          <p class="product-rating text-blue-700 mb-2">{{ product.rating?.rate }} / 5 ({{ product.rating?.count }}
+            reviews)</p>
           <p class="product-description mb-4">{{ product.description }}</p>
           <div class="mt-auto text-right">
             <p class="product-price text-xl text-right">${{ product.price }}</p>
-            <button @click="addProductToCart()" class="add-to-cart-btn">Add to Cart</button>
+            <button
+                @click="addProductToCart()"
+                class="add-to-cart-btn p-2 rounded transition-all duration-300 ease-in-out text-white"
+                :class="addedToCart ? 'bg-green-500' : 'bg-blue-500'"
+                :disabled="addedToCart"
+            >
+              {{ addedToCart ? '✔ Added' : 'Add to Cart' }}
+            </button>
           </div>
         </div>
       </div>
@@ -49,21 +57,33 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, defineProps } from 'vue';
-import { useRoute } from 'vue-router';
-import { apiService } from '@/api/apiService.js';
-import { cartStore } from '@/store/store.js';
+import {ref, onMounted, watch} from 'vue';
+import {useRoute} from 'vue-router';
+import {apiService} from '@/api/apiService.js';
+import {cartStore} from '@/store/store.js';
 import ProductCard from "@/components/ProductCard.vue";
+
+const props = defineProps({
+  searchQuery: {
+    type: String,
+    default: '',
+  }
+});
 
 const route = useRoute();
 const product = ref(null);
 const error = ref(false);
+const addedToCart = ref(false);
 const relatedProducts = ref([]);
 const otherProducts = ref([]);
 
 function addProductToCart() {
-  if(product.value) {
+  if (product.value) {
     cartStore.addToCart(product.value);
+    addedToCart.value = true;
+    setTimeout(() => {
+      addedToCart.value = false;
+    }, 1500);
   }
 }
 
@@ -75,13 +95,6 @@ watch(() => route.params.id, (newId) => {
   fetchProduct(newId);
 });
 
-const props = defineProps({
-  searchQuery: {
-    type: String,
-    default: '',
-  },
-});
-
 async function fetchProduct(productId) {
   try {
     const data = await apiService.getProductById(productId);
@@ -89,7 +102,7 @@ async function fetchProduct(productId) {
       product.value = data;
       error.value = false;
       await fetchRelatedProducts(data);
-      await fetchNonRelatedProducts(data);
+      await fetchOtherProducts(data);
     } else {
       error.value = true;
     }
@@ -108,7 +121,7 @@ async function fetchRelatedProducts(currentProduct) {
   }
 }
 
-async function fetchNonRelatedProducts(currentProduct) {
+async function fetchOtherProducts(currentProduct) {
   try {
     const products = await apiService.getProducts();
     const filteredProducts = products.filter(
@@ -116,7 +129,7 @@ async function fetchNonRelatedProducts(currentProduct) {
     );
     otherProducts.value = shuffleArray(filteredProducts);
   } catch (error) {
-    console.error('Error fetching related products:', error);
+    console.error('Error fetching other products:', error);
   }
 }
 
