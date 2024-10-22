@@ -63,6 +63,13 @@ import {apiService} from '@/api/apiService.js';
 import {cartStore} from '@/store/store.js';
 import ProductCard from "@/components/ProductCard.vue";
 
+const props = defineProps({
+  searchQuery: {
+    type: String,
+    default: '',
+  }
+});
+
 const route = useRoute();
 const product = ref(null);
 const error = ref(false);
