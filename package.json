@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest --ui",
+    "test:pipeline": "vitest",
     "start": "node src/router/server.js"
   },
   "dependencies": {
