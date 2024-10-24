@@ -69,7 +69,7 @@
 
           <div class="p-4">
             <p class="text-lg font-bold text-right mb-4">Total Price: ${{ totalCartPrice }}</p>
-            <button class="text-white w-full py-3 bg-green-500 rounded hover:bg-green-600 transition">
+            <button @click="goToCheckout" class="text-white w-full py-3 bg-green-500 rounded hover:bg-green-600 transition">
               Checkout
             </button>
           </div>
@@ -151,6 +151,10 @@ function toggleCart() {
 function removeItem(index, event) {
   event.stopPropagation();
   cartStore.deleteFromCart(index);
+}
+
+function goToCheckout() {
+  router.push('/checkout');
 }
 
 document.addEventListener('click', (event) => {
