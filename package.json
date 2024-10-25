@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "test": "vitest --ui",
     "test:pipeline": "vitest --run",
-    "start": "npm run test:pipeline && docker-compose up -d && npm run build && npm run preview"
+    "start": "npm install && npm run test:pipeline && docker-compose up -d && npm run build && npm run preview"
   },
   "dependencies": {
     "axios": "^1.7.7",
