@@ -7,11 +7,7 @@ This is a school project which is aimed at demonstrating the fundamentals of bui
 git clone https://github.com/marcusju23/vueproject-group7.git
 cd vueproject-group7
 ```
-2. **Install dependencies**:
-```sh
-npm install
-```
-3. **Run the docker compose and start the application**:
+2. **Install dependencies, run the docker compose and start the application**:
 ```sh
 npm run start
 ```
