@@ -1,20 +1,25 @@
 <template>
-  <div class="grid">
+  <div class="container mx-auto p-4">
     <div class="content mt-16 flex items-center justify-center">
-      <div class="flex" v-if="product">
-        <div>
-          <img class="max-w-sm mb-32" :src="product.image" alt="product"/>
+      <div class="flex flex-col md:flex-row items-start" v-if="product">
+        <div class="flex-shrink-0">
+          <img
+              class="w-64 h-64 md:w-80 md:h-80 object-contain transition-transform transform hover:scale-105"
+              :src="product.image"
+              alt="product"
+          />
         </div>
-        <div class="relative ml-6 flex-1 flex flex-col">
-          <h1 class="product-title mb-2">{{ product.title }}</h1>
-          <p class="product-rating text-blue-700 mb-2">{{ product.rating?.rate }} / 5 ({{ product.rating?.count }}
-            reviews)</p>
-          <p class="product-description mb-4">{{ product.description }}</p>
-          <div class="mt-auto text-right">
-            <p class="product-price text-xl text-right">${{ product.price }}</p>
+        <div class="relative ml-0 md:ml-8 flex-1 flex flex-col mt-6 md:mt-0 space-y-3 max-w-lg">
+          <h1 class="text-2xl font-semibold text-gray-800">{{ product.title }}</h1>
+          <p class="text-blue-600 font-medium">
+            {{ product.rating?.rate }} / 5 ({{ product.rating?.count }} reviews)
+          </p>
+          <p class="text-gray-600">{{ product.description }}</p>
+          <div class="flex flex-col items-start space-y-2 mt-4">
+            <p class="text-2xl font-bold text-teal-500">${{ product.price }}</p>
             <button
-                @click="addProductToCart()"
-                class="add-to-cart-btn p-2 rounded transition-all duration-300 ease-in-out text-white"
+                @click="addProductToCart"
+                class="p-3 w-full max-w-xs rounded-full transition-all duration-300 ease-in-out text-white shadow-lg transform hover:scale-105"
                 :class="addedToCart ? 'bg-green-500' : 'bg-blue-500'"
                 :disabled="addedToCart"
             >
@@ -25,36 +30,40 @@
       </div>
 
       <div v-else-if="error">
-        <p>Product not found!</p>
+        <p class="text-red-500">Product not found!</p>
       </div>
 
       <div v-else>
-        Loading product details...
+        <p>Loading product details...</p>
       </div>
     </div>
   </div>
 
-  <div class="flex pt-10">
+  <div class="flex flex-col pt-10">
     <div class="max-w-full px-4">
-      <h3 class="text-2xl" v-if="product">
-        Related products to <span class="capitalize font-semibold">{{ product.category }}</span>
+      <h3 class="text-2xl font-semibold" v-if="product">
+        Related products to <span class="capitalize font-semibold text-teal-600">{{ product.category }}</span>
       </h3>
       <div v-else>Loading...</div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-4">
         <ProductCard v-for="(relatedProduct, index) in relatedProducts" :key="index" :product="relatedProduct"/>
       </div>
     </div>
   </div>
 
-  <div class="flex pt-10">
+  <div class="flex flex-col pt-10">
     <div class="max-w-full px-4">
-      <h3 class="text-2xl">Other products</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <h3 class="text-2xl font-semibold">Other products</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-4">
         <ProductCard v-for="(otherProduct, index) in otherProducts" :key="index" :product="otherProduct"/>
       </div>
     </div>
   </div>
 </template>
+
+
+
+
 
 <script setup>
 import {ref, onMounted, watch} from 'vue';
