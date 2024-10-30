@@ -1,5 +1,5 @@
 <template>
-  <nav class="z-50 sticky top-0 flex justify-between items-center p-4 backdrop-blur-md bg-black/25 text-white">
+  <nav class="z-50 sticky top-0 flex flex-wrap justify-between items-center p-4 backdrop-blur-md bg-black/25 text-white">
     <div class="flex items-center space-x-4">
       <ul class="flex space-x-4">
         <RouterLink active-class="active" to="/"><img class="max-h-7" src="@/components/icons/home-icon.png" alt="Home">
@@ -19,10 +19,10 @@
         </li>
       </ul>
 
-      <div class="relative">
+      <div class="relative w-full sm:w-80 md:w-96">
         <input v-model="searchQuery" @input="emitSearchQuery" type="text" placeholder="Search for products..."
-               class="w-96 px-4 py-2 rounded-lg backdrop-blur-lg bg-black/30 text-white placeholder-gray-400 focus:outline-none
-            focus:ring focus:ring-green-500"/>
+               class="w-full px-4 py-2 rounded-lg backdrop-blur-lg bg-black/30 text-white placeholder-gray-400 focus:outline-none focus:ring focus:ring-green-500"
+        />
         <ul v-if="filteredResults.length > 0"
             class="absolute mt-2 w-96 bg-white rounded-lg shadow-lg max-h-48 overflow-y-auto z-10">
           <li v-for="product in filteredResults" :key="product.id" @click="goToProduct(product.id)"
@@ -48,7 +48,7 @@
         </button>
 
         <div v-if="isCartOpen" ref="cartDropdown"
-             class="z-50 absolute right-[-45%] top-14 w-[400px] text-white backdrop-blur-lg bg-black/30">
+             class="z-50 absolute right-0 top-14 w-full sm:w-[400px] text-white backdrop-blur-lg bg-black/30">
           <div class="max-h-[300px] overflow-y-auto">
             <ul v-for="(cartProduct, index) in cartStore.products" :key="index">
               <li>
