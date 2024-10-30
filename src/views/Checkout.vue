@@ -11,9 +11,6 @@
       <button @click="submitOrder">Place Order</button>
     </div>
 
-    <div v-else>
-      <p>Your cart is empty!</p>
-    </div>
 
     <div v-if="orderSuccess">
       <h2>Order Confirmation</h2>
@@ -46,32 +43,33 @@
 </template>
 
 <script>
-import ProductCard from '@/components/ProductCard.vue';  
-import { cartStore } from '@/store/store.js';  
-import { apiService } from '@/api/apiService.js'; 
+import router from '@/router/index.js'
+import ProductCard from '@/components/ProductCard.vue';
+import { cartStore } from '@/store/store.js';
+import { apiService } from '@/api/apiService.js';
 
 export default {
   components: {
-    ProductCard  
+    ProductCard
   },
   data() {
     return {
-      orderSuccess: false,   
-      orderDetails: {},      
-      confirmedOrders: [],   
-      orderLoaded: false     
+      orderSuccess: false,
+      orderDetails: {},
+      confirmedOrders: [],
+      orderLoaded: false
     };
   },
   computed: {
     cartItems() {
-      return cartStore.products;  
+      return cartStore.products;
     },
     totalPrice() {
       return this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
     }
   },
   mounted() {
-    this.fetchOrders(); 
+    this.fetchOrders();
   },
   methods: {
     async submitOrder() {
@@ -85,7 +83,7 @@ export default {
         const result = await apiService.createOrder(order);
         this.orderSuccess = true;
         this.orderDetails = result;
-        cartStore.products = [];  
+        cartStore.products = [];
         localStorage.removeItem('addedToCart');
         await this.fetchOrders();
       } catch (error) {
@@ -95,8 +93,8 @@ export default {
     },
     async fetchOrders() {
       try {
-        const data = await apiService.getOrders(); 
-        console.log('Fetched orders:', data); 
+        const data = await apiService.getOrders();
+        console.log('Fetched orders:', data);
         this.confirmedOrders = data;
         this.orderLoaded = true;
       } catch (error) {
@@ -104,15 +102,16 @@ export default {
       }
     },
     async cancelOrder(orderId) {
-    try {
+      try {
         await apiService.deleteOrder(orderId);
         this.confirmedOrders = this.confirmedOrders.filter(order => order._id !== orderId);
-        alert('Order canceled successfully.');
-    } catch (error) {
+        alert('Order canceled successfully. Redirecting to Home Page');
+        router.push({ path: '/' });
+      } catch (error) {
         console.error('Error cancelling order:', error);
         alert('Failed to cancel the order: ' + error.message);
+      }
     }
-}
   }
 };
 </script>
