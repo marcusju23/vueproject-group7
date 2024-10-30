@@ -15,6 +15,9 @@
             <li>
               <RouterLink @click="toggleDropdown" to="/contact" class="menu-item">Contact</RouterLink>
             </li>
+            <li>
+              <RouterLink @click="toggleDropdown" to="/checkout" class="menu-item">Orders</RouterLink>
+            </li>
           </ul>
         </li>
       </ul>
