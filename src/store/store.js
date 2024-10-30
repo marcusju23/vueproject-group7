@@ -1,7 +1,7 @@
 import { reactive, watch } from 'vue';
 
 export const cartStore = reactive({
-  products: [],
+  products: JSON.parse(localStorage.getItem("addedToCart")) || [],
 
   addToCart(newProduct) {
     const existingProduct = this.products.find(p => p.id === newProduct.id);
