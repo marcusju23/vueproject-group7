@@ -1,5 +1,6 @@
 <template>
-  <nav class="z-50 sticky top-0 flex flex-wrap justify-between items-center p-4 backdrop-blur-md bg-black/25 text-white">
+  <nav
+      class="z-50 sticky top-0 flex flex-wrap justify-between items-center p-4 backdrop-blur-md bg-black/25 text-white">
     <div class="flex items-center space-x-4">
       <ul class="flex space-x-4">
         <RouterLink active-class="active" to="/"><img class="max-h-7" src="@/components/icons/home-icon.png" alt="Home">
@@ -48,32 +49,43 @@
         </button>
 
         <div v-if="isCartOpen" ref="cartDropdown"
-             class="z-50 absolute right-0 top-14 w-full sm:w-[400px] text-white backdrop-blur-lg bg-black/30">
-          <div class="max-h-[300px] overflow-y-auto">
-            <ul v-for="(cartProduct, index) in cartStore.products" :key="index">
-              <li>
-                <div class="flex items-center">
-                  <img class="p-1 max-h-12" :src="cartProduct.image" :alt="cartProduct.title">
-
-                  <div class="p-1 grow">
-                    <p class="text-sm font-semibold">{{ cartProduct.title }}</p>
-                    <p class="text-sm">{{ cartProduct.price }}</p>
-                    <p class="text-sm">Quantity: {{ cartProduct.quantity }}</p>
+             class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 sm:absolute sm:top-14 sm:right-0 sm:w-[400px] sm:bg-black/30 rounded-lg p-4 sm:p-0 sm:inset-auto">
+          <div class="w-full max-w-md bg-gray-900 rounded-lg overflow-hidden sm:rounded-none sm:max-w-none">
+            <div class="flex justify-between items-center bg-gray-800 p-4">
+              <h2 class="text-lg font-semibold text-white">Shopping Cart</h2>
+              <button @click="isCartOpen = false" class="text-white bg-red-500 rounded-full p-2 sm:hidden">
+                X
+              </button>
+            </div>
+            <div class="overflow-y-auto max-h-[60vh] sm:max-h-[300px] p-4">
+              <ul v-for="(cartProduct, index) in cartStore.products" :key="index">
+                <li class="flex items-center bg-gray-800 p-4 rounded-lg mb-3">
+                  <img class="w-16 h-16 object-cover rounded-lg mr-4" :src="cartProduct.image" :alt="cartProduct.title">
+                  <div class="flex-grow">
+                    <p class="text-sm font-semibold text-white">{{ cartProduct.title }}</p>
+                    <p class="text-sm text-gray-400">${{ cartProduct.price }}</p>
+                    <p class="text-sm text-gray-400">Quantity: {{ cartProduct.quantity }}</p>
                   </div>
-
-                  <button @click="removeItem(index, $event)" class="text-white bg-black/30 p-1 m-1 rounded">X</button>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div class="p-4">
-            <p class="text-lg font-bold text-right mb-4">Total Price: ${{ totalCartPrice }}</p>
-            <button class="text-white w-full py-3 bg-green-500 rounded hover:bg-green-600 transition">
-              Checkout
-            </button>
+                  <button @click="removeItem(index, $event)" class="text-gray-500 hover:text-white transition ml-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                  </button>
+                </li>
+              </ul>
+              <p v-if="cartStore.products.length === 0" class="text-center text-gray-500">Your cart is empty</p>
+            </div>
+            <div class="p-4 bg-gray-800">
+              <p class="text-lg font-bold text-center text-white mb-4">Total Price: ${{ totalCartPrice }}</p>
+              <button
+                  class="w-full py-3 bg-green-600 rounded-lg text-white font-semibold hover:bg-green-700 transition">
+                Checkout
+              </button>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </nav>
