@@ -29,7 +29,7 @@
         <ul v-if="filteredResults.length > 0"
             class="absolute mt-2 w-full max-w-[90vw] sm:w-96 bg-white rounded-lg shadow-lg max-h-48 overflow-y-auto z-10">
           <li v-for="product in filteredResults" :key="product.id" @click="goToProduct(product.id)"
-            class="px-4 py-2 flex items-center cursor-pointer hover:bg-gray-100 text-black">
+              class="px-4 py-2 flex items-center cursor-pointer hover:bg-gray-100 text-black">
             <img :src="product.image" alt="Product" class="w-12 h-12 object-cover mr-4 rounded" />
             <div class="flex-1">
               <p class="text-gray-900">{{ product.title }}</p>
@@ -45,7 +45,7 @@
         <button @click="toggleCart" class="hover:text-gray-300 focus:outline-none cart-btn" ref="cartButton">
           <img class="max-h-9" src="@/components/icons/shopping-cart.png" alt="Cart">
           <span v-if="cartStore.cartItemCount()"
-            class="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 text-center">
+                class="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 text-center">
             {{ cartStore.cartItemCount() }}
           </span>
         </button>
@@ -82,7 +82,7 @@
             </div>
             <div class="p-4 bg-gray-800 rounded-b-lg sm:rounded-none">
               <p class="text-lg font-bold text-center mb-4">Total Price: ${{ totalCartPrice }}</p>
-              <button class="w-full py-3 bg-green-600 rounded-lg hover:bg-green-700">
+              <button @click="goToCheckout" class="w-full py-3 bg-green-600 rounded-lg hover:bg-green-700">
                 Checkout
               </button>
             </div>
@@ -106,13 +106,10 @@ const isCartOpen = ref(false);
 const products = ref([]);
 const router = useRouter();
 
-
 const totalCartPrice = computed(() => {
   const sumOfProducts = cartStore.products.reduce((total, product) => total + product.price * product.quantity, 0);
   return sumOfProducts.toFixed(2);
 });
-
-const isCartEmpty = computed(() => cartStore.products.length === 0);
 
 onMounted(async () => {
   try {
@@ -134,9 +131,9 @@ function handleClickOutside(event) {
   const cartButton = document.querySelector('.cart-btn');
 
   if (
-    cartDropdown && !cartDropdown.contains(event.target) &&
-    cartButton && !cartButton.contains(event.target) &&
-    !event.target.closest('.cart-container')
+      cartDropdown && !cartDropdown.contains(event.target) &&
+      cartButton && !cartButton.contains(event.target) &&
+      !event.target.closest('.cart-container')
   ) {
     isCartOpen.value = false;
   }
@@ -145,7 +142,6 @@ function handleClickOutside(event) {
 watch(() => router.currentRoute.value, () => {
   isCartOpen.value = false;
 });
-
 
 const filteredResults = computed(() => {
   if (!searchQuery.value) return [];
@@ -173,6 +169,7 @@ function removeItem(index, event) {
 }
 
 function goToCheckout() {
+  isCartOpen.value = false;
   router.push('/checkout');
 }
 
