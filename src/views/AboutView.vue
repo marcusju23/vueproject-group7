@@ -71,7 +71,7 @@
     </div>
     <div class="mt-8 text-center">
       <h2 class="text-3xl font-semibold mb-4">Follow Us</h2>
-      <div class="flex justify-center space-x-4">
+      <div class="flex flex-wrap justify-center gap-4">
         <a href="https://www.youtube.com/watch?v=h9uFQv3t1AU" target="_blank"
            class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300 transition ease-in-out duration-150">
           YouTube
@@ -95,3 +95,5 @@
     </div>
   </div>
 </template>
+<script setup lang="ts">
+</script>

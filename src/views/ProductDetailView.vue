@@ -1,17 +1,18 @@
 <template>
   <div class="container mx-auto p-4">
     <div class="content mt-16 flex items-center justify-center">
-      <div class="flex flex-col md:flex-row items-start" v-if="product">
+      <div class="flex flex-col sm:flex-row items-start space-y-6 sm:space-y-0 sm:space-x-8" v-if="product">
         <div class="flex-shrink-0">
           <img
-              class="w-64 h-64 md:w-80 md:h-80 object-contain transition-transform transform hover:scale-105"
+              class="w-full sm:w-80 sm:h-80 object-contain transition-transform transform hover:scale-105"
               :src="product.image"
               alt="product"
           />
+
         </div>
         <div class="relative ml-0 md:ml-8 flex-1 flex flex-col mt-6 md:mt-0 space-y-3 max-w-lg">
-          <h1 class="text-2xl font-semibold text-gray-800">{{ product.title }}</h1>
-          <p class="text-blue-600 font-medium">
+          <h1 class="text-2xl sm:text-3xl font-semibold text-gray-800">{{ product.title }}</h1>
+          <p class="text-blue-600 font-medium text-base sm:text-lg">
             {{ product.rating?.rate }} / 5 ({{ product.rating?.count }} reviews)
           </p>
           <p class="text-gray-600">{{ product.description }}</p>
@@ -54,7 +55,7 @@
   <div class="flex flex-col pt-10">
     <div class="max-w-full px-4">
       <h3 class="text-2xl font-semibold">Other products</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
         <ProductCard v-for="(otherProduct, index) in otherProducts" :key="index" :product="otherProduct"/>
       </div>
     </div>

@@ -1,5 +1,6 @@
 <template>
-  <nav class="z-50 sticky top-0 flex justify-between items-center p-4 backdrop-blur-md bg-black/25 text-white">
+  <nav
+      class="z-50 sticky top-0 flex flex-wrap justify-between items-center p-4 backdrop-blur-md bg-black/25 text-white">
     <div class="flex items-center space-x-4">
       <ul class="flex space-x-4">
         <RouterLink active-class="active" to="/"><img class="max-h-7" src="@/components/icons/home-icon.png" alt="Home">
@@ -21,12 +22,12 @@
           </ul>
         </li>
       </ul>
-
-      <div class="relative">
-        <input v-model="searchQuery" @input="emitSearchQuery" type="text" placeholder="Search for products..." class="w-96 px-4 py-2 rounded-lg backdrop-blur-lg bg-black/30 text-white placeholder-gray-400 focus:outline-none
-            focus:ring focus:ring-green-500" />
+      <div class="relative w-full sm:w-80 md:w-96">
+        <input v-model="searchQuery" @input="emitSearchQuery" type="text" placeholder="Search for products..."
+               class="w-full px-4 py-2 rounded-lg backdrop-blur-lg bg-black/30 text-white placeholder-gray-400 focus:outline-none focus:ring focus:ring-green-500"
+        />
         <ul v-if="filteredResults.length > 0"
-          class="absolute mt-2 w-96 bg-white rounded-lg shadow-lg max-h-48 overflow-y-auto z-10">
+            class="absolute mt-2 w-full max-w-[90vw] sm:w-96 bg-white rounded-lg shadow-lg max-h-48 overflow-y-auto z-10">
           <li v-for="product in filteredResults" :key="product.id" @click="goToProduct(product.id)"
             class="px-4 py-2 flex items-center cursor-pointer hover:bg-gray-100 text-black">
             <img :src="product.image" alt="Product" class="w-12 h-12 object-cover mr-4 rounded" />
@@ -48,36 +49,46 @@
             {{ cartStore.cartItemCount() }}
           </span>
         </button>
-        <div v-show="!isCartEmpty">
-          <div v-if="isCartOpen" ref="cartDropdown"
-            class="z-50 absolute right-[-45%] top-14 w-[400px] text-white backdrop-blur-lg bg-black/30">
-            <div class="max-h-[300px] overflow-y-auto">
+        <div v-if="isCartOpen" ref="cartDropdown"
+             class="z-50 sm:absolute sm:right-0 sm:top-14 sm:w-[400px] sm:bg-gray-900 sm:rounded-lg
+            fixed left-0 top-[calc(100%+8px)] w-full bg-gray-900 text-white rounded-b-lg shadow-lg p-4 sm:p-0 sm:inset-auto">
+          <div class="w-full max-w-md sm:max-w-none">
+            <div class="flex justify-between items-center bg-gray-800 p-4 rounded-t-lg sm:rounded-none">
+              <h2 class="text-lg font-semibold">Shopping Cart</h2>
+              <button @click="isCartOpen = false" class="text-gray-400 hover:text-gray-200 transition-colors rounded-full p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+              </button>
+
+            </div>
+            <div class="overflow-y-auto max-h-[60vh] sm:max-h-[300px] p-4">
               <ul v-for="(cartProduct, index) in cartStore.products" :key="index">
-                <li>
-                  <div class="flex items-center">
-                    <img class="p-1 max-h-12" :src="cartProduct.image" :alt="cartProduct.title">
-
-                    <div class="p-1 grow">
-                      <p class="text-sm font-semibold">{{ cartProduct.title }}</p>
-                      <p class="text-sm">{{ cartProduct.price }}</p>
-                      <p class="text-sm">Quantity: {{ cartProduct.quantity }}</p>
-                    </div>
-
-                    <button @click="removeItem(index, $event)" class="text-white bg-black/30 p-1 m-1 rounded">X</button>
+                <li class="flex items-center bg-gray-800 p-4 rounded-lg mb-3">
+                  <img class="w-16 h-16 object-cover rounded-lg mr-4" :src="cartProduct.image" :alt="cartProduct.title">
+                  <div class="flex-grow">
+                    <p class="text-sm font-semibold">{{ cartProduct.title }}</p>
+                    <p class="text-sm">${{ cartProduct.price }}</p>
+                    <p class="text-sm">Quantity: {{ cartProduct.quantity }}</p>
                   </div>
+                  <button @click="removeItem(index, $event)" class="text-gray-500 hover:text-white ml-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                  </button>
                 </li>
               </ul>
+              <p v-if="cartStore.products.length === 0" class="text-center text-gray-500">Your cart is empty</p>
             </div>
-
-            <div class="p-4">
-              <p class="text-lg font-bold text-right mb-4">Total Price: ${{ totalCartPrice }}</p>
-              <button @click="goToCheckout"
-                class="text-white w-full py-3 bg-green-500 rounded hover:bg-green-600 transition">
+            <div class="p-4 bg-gray-800 rounded-b-lg sm:rounded-none">
+              <p class="text-lg font-bold text-center mb-4">Total Price: ${{ totalCartPrice }}</p>
+              <button class="w-full py-3 bg-green-600 rounded-lg hover:bg-green-700">
                 Checkout
               </button>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </nav>
