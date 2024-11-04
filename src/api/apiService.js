@@ -1,5 +1,4 @@
 const API_URL = 'http://localhost:4000/api';
-const ORDER_URL = 'http://localhost:4000/api/orders';
 
 export const apiService = {
     async getProducts() {
@@ -10,9 +9,17 @@ export const apiService = {
         const response = await fetch(`${API_URL}/products/${id}`);
         return await response.json();
     },
-    
+    async getOrders() {
+        const response = await fetch(`${API_URL}/orders`);
+        return await response.json();
+    },
+    async getOrderById(id) {
+        const response = await fetch(`${API_URL}/orders/${id}`);
+        return await response.json();
+    },
+
     async createOrder(orderData) {
-        const response = await fetch(ORDER_URL, {
+        const response = await fetch(`${API_URL}/orders`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(orderData)
@@ -21,20 +28,21 @@ export const apiService = {
     },
 
     async updateOrder(id, orderData) {
-        const response = await fetch(`${ORDER_URL}/${id}`, {
+        const response = await fetch(`${API_URL}/orders/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(orderData)
         });
         return await response.json();
     },
-
-    async cancelOrder(id) {
-        const response = await fetch(`${ORDER_URL}/${id}/cancel`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' }
+    async deleteOrder(id) {
+        const response = await fetch(`${API_URL}/orders/${id}`, {
+          method: 'DELETE'
         });
-        return await response.json();
-    },
+    
+        if (!response.ok) {
+          throw new Error('Failed to delete order');
+        }
+      }
 };
 
